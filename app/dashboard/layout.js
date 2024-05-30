@@ -26,11 +26,15 @@ export default function DashboardLayout({ children }) {
   return (
     isLoading && (
       <Provider store={store}>
-        <main>
+        <main
+          style={{
+            backgroundColor: "#F6F6F6",
+          }}
+        >
           <Stack direction={"row"} width={"100vw"} height={"100dvh"}>
             <AlertComp />
             <SideNavBar />
-            <Stack width={"calc(100% - 300px)"} p={2}>
+            <Stack width={"calc(100% - 300px)"} padding={"20px 20px 20px 0"}>
               <TopNavBar />
               {children}
             </Stack>

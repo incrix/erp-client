@@ -17,8 +17,8 @@ export default function CustomeTextField(props) {
             width: props.width,
             "& fieldset": {
               borderColor: "#82878C",
-              borderWidth: 2,
-              borderRadius: "10px",
+              borderWidth: props.borderWidth ? props.borderWidth : 2,
+              borderRadius: props.borderRadius ? props.borderRadius : "10px",
               "--smooth-corners": props.smoothCorners,
               maskImage: "paint(smooth - corners)",
               "-webkit-mask-image": "paint(smooth-corners)",
@@ -31,7 +31,9 @@ export default function CustomeTextField(props) {
             },
           },
         }}
-      >{props.children}</TextField>
+      >
+        {props.children}
+      </TextField>
     </>
   );
 }

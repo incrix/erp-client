@@ -9,6 +9,7 @@ import reportIcon from "@/public/icons/report-icon.svg";
 import ecomIcon from "@/public/icons/ecom-icon.svg";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import menuIcon from "@/public/icons/menu-icon.svg";
 
 function SvgImage(props){
   const { color, width, height, src } = props;
@@ -70,6 +71,10 @@ function LogoutIcon(props) {
   return <LogoutRoundedIcon {...props} />;
 }
 
+function MenuIcon(props) {
+  return <SvgImage {...props} src={menuIcon.src} />
+}
+
 const Icons = {
   DashIcon,
   ProductIcon,
@@ -82,6 +87,7 @@ const Icons = {
   EcomIcon,
   SettingsIcon,
   LogoutIcon,
+  MenuIcon,
 };
 
 export default Icons;

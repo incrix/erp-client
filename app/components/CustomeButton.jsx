@@ -16,7 +16,7 @@ export default function CustomeButton(props) {
           border: props.border || "none",
           borderColor: props.borderColor || "transparent",
           backgroundColor: props.backgroundColor,
-          fontWeight: "400",
+          fontWeight: props.fontWeight ? props.fontWeight : "400",
           height: props.height,
           width: props.width,
           color: props.textColor || "none",
