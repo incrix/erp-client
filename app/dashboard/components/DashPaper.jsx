@@ -1,7 +1,8 @@
 "use client";
-import { Stack, Typography, TablePagination } from "@mui/material";
-import { useState } from "react";
+import { Stack, Typography, Divider, IconButton } from "@mui/material";
 import { SmoothCorners } from "react-smooth-corners";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 export function DashPaperLayout({ children }) {
   return (
@@ -9,7 +10,6 @@ export function DashPaperLayout({ children }) {
       gap={1}
       sx={{
         margin: "30px 0 0 0",
-        // padding: "20px",
         borderRadius: "20px",
         background: "#fff",
         height: "100%",
@@ -29,12 +29,8 @@ export function DashPaperLayout({ children }) {
       <Stack direction={"column"} margin={"0 20px"}>
         {children.find((child) => child.type === DashPaperBody)}
       </Stack>
-      <Stack
-        direction={"column"}
-        sx={{
-          marginTop: "auto",
-        }}
-      >
+      <Stack direction={"column"} marginTop={"auto"}>
+        <Divider sx={{ margin: "0 20px", borderColor: "#F6F6F6" }} />
         {children.find((child) => child.type === DashPaperFooter)}
       </Stack>
     </Stack>
@@ -73,31 +69,82 @@ export function DashPaperBody({ children }) {
   return <Stack>{children}</Stack>;
 }
 
-export function DashPaperFooter({ children }) {
-  return <Stack>{children}</Stack>;
+export function DashPaperFooter({ children, caption }) {
+  return (
+    <Stack
+      height={"60px"}
+      direction={"row"}
+      alignItems={"center"}
+      justifyContent={"space-between"}
+      margin={"0 20px"}
+    >
+      <Stack>{caption ? { caption } : null}</Stack>
+      {children}
+    </Stack>
+  );
 }
 
-export function DashPaperPagination({ children }) {
-  const [page, setPage] = useState(2);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+export function DashPaperPagination({
+  currentPage,
+  rowPerPage,
+  setCurrentPage,
+  rowLength,
+}) {
+  const totalPage = Math.ceil(rowLength / rowPerPage);
+  const onNextPage = () => {
+    console.log(currentPage);
+    if (currentPage < totalPage) setCurrentPage(currentPage + 1);
   };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  const onPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-
   return (
-    <TablePagination
-      component="div"
-      count={100}
-      page={page}
-      onPageChange={handleChangePage}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-    />
+    <Stack
+      direction={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      gap={2}
+    >
+      <Typography variant="p" fontSize={12} fontWeight={600}>
+        Page {currentPage} of {totalPage}
+      </Typography>
+      <IconButton
+        size="small"
+        sx={{
+          borderRadius: "10px",
+          color: "white",
+          backgroundColor: "#000E33",
+          "&:hover": {
+            backgroundColor: "#000E33",
+          },
+        }}
+        onClick={onPreviousPage}
+      >
+        <ArrowBackIosRoundedIcon fontSize="18px" />
+      </IconButton>
+      <Typography
+        variant="p"
+        fontSize={20}
+        fontWeight={600}
+        width={"45px"}
+        textAlign={"center"}
+      >
+        {currentPage}
+      </Typography>
+      <IconButton
+        size="small"
+        sx={{
+          borderRadius: "10px",
+          color: "white",
+          backgroundColor: "#000E33",
+          "&:hover": {
+            backgroundColor: "#000E33",
+          },
+        }}
+        onClick={onNextPage}
+      >
+        <ArrowForwardIosRoundedIcon fontSize="18px" />
+      </IconButton>
+    </Stack>
   );
 }

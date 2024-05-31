@@ -1,5 +1,4 @@
 "use client";
-import { Stack, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -44,7 +43,17 @@ const HeadStyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function TableComponent({ rows, headList, height, caption }) {
+export default function TableComponent({
+  rows,
+  headList,
+  height,
+  currentPage,
+  rowPerPage,
+}) {
+  const rowsPerPage = rows.slice(
+    (currentPage - 1) * rowPerPage,
+    currentPage * rowPerPage
+  );
   return (
     <TableContainer
       sx={{
@@ -67,7 +76,6 @@ export default function TableComponent({ rows, headList, height, caption }) {
     >
       <SmoothCorners style={{ display: "none" }} />
       <Table dense table size="small">
-        {caption ? <caption>{caption}</caption> : null}
         <TableHead
           sx={{
             height: "55px",
@@ -83,7 +91,8 @@ export default function TableComponent({ rows, headList, height, caption }) {
           </HeadStyledTableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => {
+          {rowsPerPage.map((row) => {
+            console.log(row);
             return (
               <StyledTableRow
                 key={row.id}
@@ -92,8 +101,6 @@ export default function TableComponent({ rows, headList, height, caption }) {
                 }}
               >
                 {headList.map((item, index) => {
-                  console.log(item.key);
-
                   if (index === 0)
                     return (
                       <StyledTableCell component={"th"} scope="row">
@@ -102,10 +109,10 @@ export default function TableComponent({ rows, headList, height, caption }) {
                     );
                   if (item.type == "action") {
                     const ActionComp = item.actionComp;
-                    const value = row[item.key];
+                    // const value = row[item.key];
                     return (
                       <StyledTableCell>
-                        <ActionComp id={row.id} value={value} />
+                        <ActionComp id={row.id} row={row} />
                       </StyledTableCell>
                     );
                   }

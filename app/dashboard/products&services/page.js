@@ -4,20 +4,23 @@ import TableComponent from "../components/TableComponent";
 import SalesButton from "./components/SalesButton";
 import ActionButton from "./components/ActionButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import {
   DashPaperLayout,
   DashPaperHead,
   DashPaperBody,
   DashPaperFooter,
-  DashPaperPagination
+  DashPaperPagination,
 } from "../components/DashPaper";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import CustomeButton from "@/app/components/CustomeButton";
 import CustomeTextField from "@/app/components/CustomeTextField";
+import { useState } from "react";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowPerPage = 10;
   const headList = [
     { title: "Name", key: "name", type: "string" },
     { title: "Price", key: "price", type: "string" },
@@ -57,7 +60,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "01",
+      id: "04",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -65,7 +68,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "02",
+      id: "05",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -73,7 +76,7 @@ export default function Page() {
       isSales: false,
     },
     {
-      id: "03",
+      id: "06",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -81,7 +84,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "01",
+      id: "07",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -89,7 +92,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "02",
+      id: "08",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -97,7 +100,7 @@ export default function Page() {
       isSales: false,
     },
     {
-      id: "03",
+      id: "09",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -105,7 +108,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "01",
+      id: "10",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -113,7 +116,7 @@ export default function Page() {
       isSales: true,
     },
     {
-      id: "02",
+      id: "11",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -121,7 +124,7 @@ export default function Page() {
       isSales: false,
     },
     {
-      id: "03",
+      id: "12",
       name: "Arrival 15 shotsArrival 15 shots",
       price: 356,
       category: 16,
@@ -134,8 +137,8 @@ export default function Page() {
       <DashPaperLayout>
         <DashPaperHead title={"Product & Services"}>
           <CustomeTextField
-          id="product"
-          name="Product"
+            id="product"
+            name="Product"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -166,12 +169,18 @@ export default function Page() {
           <TableComponent
             headList={headList}
             rows={rows}
+            currentPage={currentPage}
+            rowPerPage={rowPerPage}
             height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
-            caption={"A basic table example with a caption"}
           />
         </DashPaperBody>
         <DashPaperFooter>
-          <DashPaperPagination />
+          <DashPaperPagination
+            currentPage={currentPage}
+            rowPerPage={rowPerPage}
+            setCurrentPage={setCurrentPage}
+            rowLength={rows.length}
+          />
         </DashPaperFooter>
       </DashPaperLayout>
     </Stack>
