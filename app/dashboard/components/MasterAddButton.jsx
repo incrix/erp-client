@@ -46,8 +46,9 @@ export default function MasterAddButton() {
           paper: {
             sx: {
               borderRadius: "10px",
+              // boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.19)",
               "--smooth-corners": 12,
-              backgroundColor: "#F8F8F8",
+              // backgroundColor: "#F8F8F8",
               maskImage: "paint(smooth - corners)",
               "-webkit-mask-image": "paint(smooth-corners)",
               marginTop: "10px",

@@ -36,9 +36,18 @@ export default function PaymentStatus({ id, row }) {
               onMouseOver={onMouseOver}
               onMouseLeave={onMouseLeave}
               onMouseOut={onMouseLeave}
+              elevation={2}
+              sx={{
+                padding: "20px",
+                borderRadius: "10px",
+              }}
             >
-              <a>avinash</a>
-              <Typography sx={{ p: 2 }}>₹{row.amount}</Typography>
+              <Typography paddingBottom={"10px"} fontSize={14}>
+                {row.status === "paid" ? "Paid Amount" : "Pending Amount"}
+              </Typography>
+              <Typography fontWeight={600} fontSize={18}>
+                ₹{row.amount}
+              </Typography>
             </Paper>
           </Fade>
         )}
