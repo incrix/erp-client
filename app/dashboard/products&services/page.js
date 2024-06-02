@@ -16,11 +16,13 @@ import useWindowDimensions from "@/util/useWindowDimensions";
 import CustomeButton from "@/app/components/CustomeButton";
 import CustomeTextField from "@/app/components/CustomeTextField";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const rowPerPage = 10;
+  const route = useRouter();
   const headList = [
     { title: "Name", key: "name", type: "string" },
     { title: "Price", key: "price", type: "string" },
@@ -160,6 +162,9 @@ export default function Page() {
             fontWeight={"500"}
             height={"40px"}
             width={"160px"}
+            onClick={() => {
+              route.push("/dashboard/products&services/create");
+            }}
             startIcon={<AddCircleIcon />}
           >
             Add Product
