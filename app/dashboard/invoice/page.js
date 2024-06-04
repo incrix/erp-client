@@ -135,7 +135,7 @@ export default function Page() {
       customer: "Avinash",
       date: "02-02-2024",
       amount: 1020,
-      status: "pending",
+      status: "partiallypaid",
     },
   ];
   return (

@@ -8,7 +8,7 @@ export default function CustomeTextField(props) {
       <TextField
         variant="outlined"
         inputProps={{
-          style: { color: "#82878C", fontSize: "16px", fontWeight: "400" },
+          style: { color: "#82878C", fontSize: "16px", fontWeight: "400",  },
         }}
         {...props}
         sx={{

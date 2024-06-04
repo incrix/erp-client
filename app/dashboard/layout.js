@@ -12,19 +12,19 @@ import store from "@/redux/store";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
-  const [isLoading, setLoading] = useState(false);
-  useEffect(() => {
-    fetch("/api/user-isLogin")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.fill_the_details) return router.push("/setup");
-        if (data.status === "error" && !data.isLogin)
-          return router.push("/signin");
-        setLoading(true);
-      });
-  }, []);
+  // const [isLoading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   fetch("/api/user-isLogin")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.fill_the_details) return router.push("/setup");
+  //       if (data.status === "error" && !data.isLogin)
+  //         return router.push("/signin");
+  //       setLoading(true);
+  //     });
+  // }, []);
   return (
-    isLoading && (
+    // isLoading && (
       <Provider store={store}>
         <main
           style={{
@@ -42,5 +42,5 @@ export default function DashboardLayout({ children }) {
         </main>
       </Provider>
     )
-  );
+  // );
 }

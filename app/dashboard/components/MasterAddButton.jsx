@@ -1,10 +1,10 @@
-import { Stack, Popover, Grid } from "@mui/material";
+import { Stack, Popover, Grid, Paper } from "@mui/material";
 import CustomeButton from "@/app/components/CustomeButton";
 import { useState } from "react";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
-import { SmoothCorners } from "react-smooth-corners";
 import NavButton from "./NavButton";
 import Icons from "@/util/icons";
+import CustomeStack from "@/app/components/CustomeStack";
 
 export default function MasterAddButton() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -44,56 +44,53 @@ export default function MasterAddButton() {
         }}
         slotProps={{
           paper: {
+            elevation: "2",
             sx: {
-              borderRadius: "10px",
-              "--smooth-corners": 12,
-              backgroundColor: "#F8F8F8",
-              maskImage: "paint(smooth - corners)",
-              "-webkit-mask-image": "paint(smooth-corners)",
+              borderRadius: "30px",
+              backgroundColor: "transparent",
               marginTop: "10px",
-              p: 2,
             },
           },
         }}
       >
-        <SmoothCorners style={{ display: "none" }} />
-
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <NavButton
-              isLight={true}
-              title={"Invoice"}
-              icon={<Icons.InvoiceIcon color="#97A1B1" />}
-            />
-            <NavButton
-              isLight={true}
-              title={"Product"}
-              icon={<Icons.ProductIcon color="#97A1B1" />}
-            />
-            <NavButton
-              isLight={true}
-              title={"Payment"}
-              icon={<Icons.PaymentIcon color="#97A1B1" />}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <NavButton
-              isLight={true}
-              title={"Customer"}
-              icon={<Icons.CustomerIcon color="#97A1B1" />}
-            />
-            <NavButton
-              isLight={true}
-              title={"Vendor"}
-              icon={<Icons.VendorIcon color="#97A1B1" />}
-            />
-            <NavButton
-              isLight={true}
-              title={"Purchase"}
-              icon={<Icons.PurchaseIcon color="#97A1B1" />}
-            />
-          </Grid>
-        </Grid>
+          <CustomeStack smoothCorners="10" background="white" sx={{padding:"20px"}} >
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <NavButton
+                  isLight={true}
+                  title={"Invoice"}
+                  icon={<Icons.InvoiceIcon color="#97A1B1" />}
+                />
+                <NavButton
+                  isLight={true}
+                  title={"Product"}
+                  icon={<Icons.ProductIcon color="#97A1B1" />}
+                />
+                <NavButton
+                  isLight={true}
+                  title={"Payment"}
+                  icon={<Icons.PaymentIcon color="#97A1B1" />}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <NavButton
+                  isLight={true}
+                  title={"Customer"}
+                  icon={<Icons.CustomerIcon color="#97A1B1" />}
+                />
+                <NavButton
+                  isLight={true}
+                  title={"Vendor"}
+                  icon={<Icons.VendorIcon color="#97A1B1" />}
+                />
+                <NavButton
+                  isLight={true}
+                  title={"Purchase"}
+                  icon={<Icons.PurchaseIcon color="#97A1B1" />}
+                />
+              </Grid>
+            </Grid>
+          </CustomeStack>
       </Popover>
     </Stack>
   );
