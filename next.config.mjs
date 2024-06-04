@@ -2,12 +2,21 @@
 import nextPWA from "next-pwa";
 
 const nextConfig = {
+  output: 'export',
+  // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
+   trailingSlash: true,
+ 
+  // Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
+   skipTrailingSlashRedirect: true,
   async rewrites() {
     return [
-      {
-        source: "/api/:path*",
-        destination:process.env.NODE_ENV !== "development" ? "https://8627zwmrja.execute-api.ap-south-1.amazonaws.com/:path*" : "http://localhost:3333/:path*",
-      },
+      // {
+      //   source: "/api/:path*",
+      //   destination:process.env.NODE_ENV !== "development" ? "https://erp-server-zeta.vercel.app/:path*" : "http://localhost:3333/:path*",
+      // },
+     { source:"/api/:path*",
+      destination:"http://localhost:3333/api/:path*" 
+    }
     ]
     },
   reactStrictMode: true, // Enable React strict mode for improved error handling
