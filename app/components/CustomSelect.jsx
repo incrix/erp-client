@@ -1,14 +1,4 @@
-import {
-  Stack,
-  Typography,
-  Select,
-  ListSubheader,
-  InputAdornment,
-} from "@mui/material";
-import CustomeTextField from "@/app/components/CustomeTextField";
-import CustomeButton from "@/app/components/CustomeButton";
-import { useState, useMemo } from "react";
-import SearchIcon from "@mui/icons-material/Search";
+import { Typography, Select } from "@mui/material";
 
 export default function CustomSelect({
   onChange,
@@ -18,16 +8,10 @@ export default function CustomSelect({
   options,
   placeholder,
   renderMenuItem,
-  listSubheader
+  listSubheader,
+  border,
+  startAdornment
 }) {
-  const [searchText, setSearchText] = useState("");
-  const containsText = (text, searchText) =>
-    text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
-  //   const displayedOptions = useMemo(
-  //     () => options.filter((option) => containsText(option, searchText)),
-  //     [searchText]
-  //   );
-
   return (
     <Select
       displayEmpty
@@ -47,13 +31,13 @@ export default function CustomSelect({
         );
       }}
       MenuProps={{
+        autoFocus: false,
         PaperProps: {
           style: {
             maxHeight: 300,
-            width: 300,
+            width: width,
             borderRadius: "15px",
             backgroundColor: "white",
-            // backgroundColor: "#F8F8F8",
           },
           sx: {
             "&::-webkit-scrollbar": {
@@ -73,11 +57,13 @@ export default function CustomSelect({
           },
         },
       }}
+      startAdornment={startAdornment}
       sx={{
         width,
         height,
         "&.MuiOutlinedInput-root": {
           "& fieldset": {
+            border,
             borderColor: "#82878C",
             borderWidth: "1px",
             borderRadius: "10px",
@@ -95,68 +81,45 @@ export default function CustomSelect({
       }}
       onChange={onChange}
     >
-        {listSubheader}
-        {/* <Stack gap={1}> */}
-          {/* <CustomeTextField
-            size="small"
-            // Autofocus on textfield
-            autoFocus
-            placeholder="Type to search..."
-            fullWidth
-            smoothCorners={12}
-            height="40px"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key !== "Escape") {
-                // Prevents autoselecting item while typing (default Select behaviour)
-                e.stopPropagation();
-              }
-            }}
-          /> */}
-          {/* <CustomeButton width="100%" smoothCorners="15">
-            Add Catagory
-          </CustomeButton>
-        </Stack> */}
+      {listSubheader}
+      {options.length != 0 ? null : (
+        <Typography width={"100%"} textAlign={"center"} padding={"10px 0 "}>
+          No {placeholder}
+        </Typography>
+      )}
       {options.map((option) => renderMenuItem(option))}
     </Select>
   );
-
-  // return (
-  //   <Autocomplete
-  //     {...props}
-  //     disablePortal
-  //     disableCloseOnSelect
-  //     options={props.options}
-  //     value={props.value}
-  //     onChange={props.onChange}
-  //     sx={{
-  //       width: props.width,
-  //       zIndex: "1000",
-  //       p: 0,
-  //       ".MuiOutlinedInput-root": {
-  //         padding: "0 10px",
-  //         height: props.height,
-  //       },
-  //     }}
-  //     popupIcon={<ArrowDropDownRoundedIcon />}
-  //     renderInput={(params) => (
-  //       <CustomeTextField
-  //         {...params}
-  //         fullWidth={true}
-  //         smoothCorners={15}
-  //         borderWidth="1px"
-  //         // height={"40px"}
-  //         borderRadius={"10px"}
-  //         placeholder={props.placeholder}
-  //       />
-  //     )}
-  //   />
-  // );
 }
+
+// return (
+//   <Autocomplete
+//     {...props}
+//     disablePortal
+//     disableCloseOnSelect
+//     options={props.options}
+//     value={props.value}
+//     onChange={props.onChange}
+//     sx={{
+//       width: props.width,
+//       zIndex: "1000",
+//       p: 0,
+//       ".MuiOutlinedInput-root": {
+//         padding: "0 10px",
+//         height: props.height,
+//       },
+//     }}
+//     popupIcon={<ArrowDropDownRoundedIcon />}
+//     renderInput={(params) => (
+//       <CustomeTextField
+//         {...params}
+//         fullWidth={true}
+//         smoothCorners={15}
+//         borderWidth="1px"
+//         // height={"40px"}
+//         borderRadius={"10px"}
+//         placeholder={props.placeholder}
+//       />
+//     )}
+//   />
+// );

@@ -30,6 +30,7 @@ export default function CustomeTextField(props) {
               borderColor: "#000E33",
             },
           },
+          ...props.sx
         }}
       >
         {props.children}

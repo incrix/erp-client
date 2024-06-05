@@ -1,32 +1,31 @@
-"use client"
+"use client";
 import { Stack, Typography, MenuItem, ListSubheader } from "@mui/material";
 import CustomeTextField from "@/app/components/CustomeTextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelect from "@/app/components/CustomSelect";
 import CustomDuoButtonGroup from "@/app/components/CustomDuoButtonGroup";
 import CustomSearchBox from "@/app/components/CustomSearchBox";
 import CustomeButton from "@/app/components/CustomeButton";
+import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
+import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
+import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
+import ScaleRoundedIcon from "@mui/icons-material/ScaleRounded";
+import Icons from "@/util/icons";
 
-export default function CreateProductForm() {
-  const [value, setValue] = useState("Product");
+export default function CreateProductForm({
+  newProduct,
+  onChangeProductValue,
+}) {
   const [unitListFiltered, setUnitListFiltered] = useState(unitList);
-  const [age, setAge] = useState("");
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    price: "",
-    tax: "",
-  });
-
-  const handleChangeAuto = (event) => {
-    setAge(event.target.value);
-  };
-  const handleChange = (value) => {
-    setValue(value);
-  };
 
   const renderUnitMenuItem = (option) => {
     return (
-      <MenuItem key={option.id} value={option.code}>
+      <MenuItem
+        onKeyDown={(e) => e.stopPropagation()}
+        key={option.id}
+        value={option.code}
+      >
         <Typography fontWeight={600} color={"#97A1B1"}>
           {option.code}
         </Typography>
@@ -34,11 +33,18 @@ export default function CreateProductForm() {
       </MenuItem>
     );
   };
-  // const unitOptions = []
-  // unitList.map((option) => {
-  //   unitOptions.push(option.name);
-  // });
-  // let displayedOptions;
+
+  const renderTaxMenuItem = (option) => {
+    return (
+      <MenuItem
+        onKeyDown={(e) => e.stopPropagation()}
+        key={option}
+        value={option}
+      >
+        <Typography color={"#97A1B1"}>{option}</Typography>
+      </MenuItem>
+    );
+  };
   return (
     <Stack gap={2}>
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
@@ -46,15 +52,30 @@ export default function CreateProductForm() {
       </Typography>
       <CustomDuoButtonGroup
         options={["Product", "Service"]}
-        onClick={handleChange}
-        value={value}
+        onClick={(value) => {
+          onChangeProductValue("type", value);
+        }}
+        value={newProduct.type}
       />
       <CustomeTextField
         width={"300px"}
         height={"40px"}
         smoothCorners={15}
         placeholder={"Product Name"}
+        // label={"Product Name"}
         borderWidth="1px"
+        InputProps={{
+          startAdornment: (
+            <Icons.ProductIcon
+              color="#82878C"
+              width="18px"
+              margin="0 5px 0 0"
+            />
+          ),
+        }}
+        onChange={(e) => {
+          onChangeProductValue("name", e.target.value);
+        }}
       />
       <Stack direction={"row"} gap={2}>
         <CustomeTextField
@@ -63,33 +84,108 @@ export default function CreateProductForm() {
           smoothCorners={15}
           placeholder={"Selling price"}
           borderWidth="1px"
+          type="number"
+          onChange={(e) => {
+            onChangeProductValue("sellingPrice", e.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <CurrencyRupeeRoundedIcon
+                style={{
+                  color: "#82878C",
+                  marginRight: "5px",
+                }}
+                fontSize="12px"
+              />
+            ),
+            endAdornment: (
+              <CustomSelect
+                onChange={(event) => {
+                  onChangeProductValue(
+                    "sellingPriceWithTax",
+                    event.target.value == "Within Tax" ? true : false
+                  );
+                }}
+                value={
+                  newProduct.sellingPriceWithTax ? "Within Tax" : "Without Tax"
+                }
+                border={"none"}
+                placeholder={"Without Tax"}
+                options={["Without Tax", "Within Tax"]}
+                width={"130px !important"}
+                height={"40px"}
+                renderMenuItem={renderTaxMenuItem}
+              />
+            ),
+          }}
         />
-        {/* <CustomSelect
-          onChange={handleChangeAuto}
-          value={age}
-          placeholder={"Without Tax"}
-          options={["Without Tax", "With Tax"]}
+        <CustomSelect
+          onChange={(event) => {
+            onChangeProductValue("taxRate", event.target.value);
+          }}
+          value={newProduct.taxRate === 0 ? "" : newProduct.taxRate}
+          placeholder={"Tax %"}
+          options={taxList}
           width={"300px"}
           height={"40px"}
-        /> */}
+          renderMenuItem={renderTaxMenuItem}
+        />
       </Stack>
       <Stack direction={"row"} gap={2}>
-        {/* <CustomSelect
-          onChange={handleChangeAuto}
-          value={age}
-          placeholder={"Tax"}
-          options={["Without Tax", "With Tax"]}
+        <CustomeTextField
           width={"300px"}
           height={"40px"}
-        /> */}
+          smoothCorners={15}
+          placeholder={"Discount"}
+          borderWidth="1px"
+          type="number"
+          onChange={(e) => {
+            console.log(e.target.value);
+            onChangeProductValue("discount", {
+              value: e.target.value,
+              type: newProduct.discount.type,
+            });
+          }}
+          InputProps={{
+            endAdornment: (
+              <CustomSelect
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  onChangeProductValue("discount", {
+                    type: event.target.value,
+                    value: newProduct.discount.value,
+                  });
+                }}
+                value={newProduct.discount.type}
+                border={"none"}
+                placeholder={"%"}
+                options={["%", "₹"]}
+                width={"100px !important"}
+                height={"40px"}
+                renderMenuItem={renderTaxMenuItem}
+              />
+            ),
+          }}
+        />
         <CustomSelect
-          onChange={handleChangeAuto}
-          value={age}
+          onChange={(event) => {
+            onChangeProductValue("unit", event.target.value);
+          }}
+          value={newProduct.unit}
           placeholder={"Unit"}
           options={unitListFiltered}
           width={"300px"}
           height={"40px"}
           renderMenuItem={renderUnitMenuItem}
+          startAdornment={
+            <ScaleRoundedIcon
+              style={{
+                color: "#82878C",
+                marginRight: "5px",
+              }}
+              fontSize="12px"
+            />
+          }
           listSubheader={
             <ListSubheader
               sx={{
@@ -97,23 +193,15 @@ export default function CreateProductForm() {
                 margin: "10px 0",
               }}
             >
-              <Stack gap={1}>
-                <CustomSearchBox options={unitList} setUnitListFiltered={setUnitListFiltered}/>
-                <CustomeButton width="100%" smoothCorners="15">
-                  Add Catagory
-                </CustomeButton>
-              </Stack>
+              <CustomSearchBox
+                options={unitList}
+                setUnitListFiltered={setUnitListFiltered}
+              />
             </ListSubheader>
           }
         />
       </Stack>
-      <CustomeTextField
-        width={"300px"}
-        height={"40px"}
-        smoothCorners={15}
-        placeholder={"Stock Quantity (num)"}
-        borderWidth="1px"
-      />
+
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
         Additional Details
       </Typography>
@@ -124,22 +212,135 @@ export default function CreateProductForm() {
           smoothCorners={15}
           placeholder={"SKU / Barcode"}
           borderWidth="1px"
+          onChange={(e) => {
+            onChangeProductValue("barcode", e.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <QrCodeScannerRoundedIcon
+                style={{
+                  color: "#82878C",
+                  marginRight: "5px",
+                }}
+                fontSize="12px"
+              />
+            ),
+          }}
+          type="number"
         />
-        {/* <CustomSelect
-          onChange={handleChangeAuto}
-          value={age}
+        <CustomSelect
+          onChange={(event) => {
+            onChangeProductValue("categoryId", event.target.value);
+          }}
+          value={newProduct.categoryId}
           placeholder={"Category"}
-          options={["Without Tax", "With Tax"]}
+          options={[]}
           width={"300px"}
           height={"40px"}
-        /> */}
+          renderMenuItem={(option) => {
+            return option ? (
+              <MenuItem>No Category</MenuItem>
+            ) : (
+              <MenuItem>No Category</MenuItem>
+            );
+          }}
+          startAdornment={
+            <CategoryRoundedIcon
+              style={{
+                color: "#82878C",
+                marginRight: "5px",
+              }}
+              fontSize="12px"
+            />
+          }
+          listSubheader={
+            <ListSubheader
+              sx={{
+                // backgroundColor: "#F8F8F8",
+                margin: "10px 0",
+              }}
+            >
+              <Stack gap={1}>
+                <CustomSearchBox
+                  options={unitList}
+                  setUnitListFiltered={setUnitListFiltered}
+                />
+                <CustomeButton
+                  width="100%"
+                  smoothCorners="15"
+                  backgroundColor="#97A1B1"
+                >
+                  Add Catagory
+                </CustomeButton>
+              </Stack>
+            </ListSubheader>
+          }
+        />
       </Stack>
-      <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
-        Product Image
-      </Typography>
+      <Stack direction={"row"} gap={2}>
+        <CustomeTextField
+          width={"300px"}
+          height={"40px"}
+          smoothCorners={15}
+          placeholder={"Buying price"}
+          borderWidth="1px"
+          type="number"
+          InputProps={{
+            startAdornment: (
+              <CurrencyRupeeRoundedIcon
+                style={{
+                  color: "#82878C",
+                  marginRight: "5px",
+                }}
+                fontSize="12px"
+              />
+            ),
+          }}
+          onChange={(e) => {
+            onChangeProductValue("buyingPrice", e.target.value);
+          }}
+        />
+        <CustomeTextField
+          width={"300px"}
+          height={"40px"}
+          smoothCorners={15}
+          placeholder={"Stock Quantity (num)"}
+          borderWidth="1px"
+          InputProps={{
+            startAdornment: (
+              <InventoryRoundedIcon
+                style={{
+                  color: "#82878C",
+                  marginRight: "5px",
+                }}
+                fontSize="12px"
+              />
+            ),
+          }}
+          onChange={(e) => {
+            onChangeProductValue("stock", e.target.value);
+          }}
+          type="number"
+        />
+      </Stack>
     </Stack>
   );
 }
+
+const taxList = [
+  "5",
+  "12",
+  "0",
+  "0.1",
+  "7.5",
+  "18",
+  "28",
+  "6",
+  "1.5",
+  "1",
+  "3",
+  "0.25",
+];
 
 const unitList = [
   {

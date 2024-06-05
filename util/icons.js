@@ -12,13 +12,14 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import menuIcon from "@/public/icons/menu-icon.svg";
 
 function SvgImage(props){
-  const { color, width, height, src } = props;
+  const { color, width, height, src, margin } = props;
   return (
     <div
       className="icon"
       style={{
         width: width ? width : "20px",
         height: height ? height : "20px",
+        margin,
         mask: `url(${src})`,
         "-webkit-mask": `url(${src})`,
         backgroundColor: color ? color : "#0080FF",

@@ -1,27 +1,25 @@
-import { Stack, InputAdornment } from "@mui/material";
+import { Stack, InputAdornment, TextField } from "@mui/material";
 import CustomeTextField from "./CustomeTextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useMemo, useEffect } from "react";
 
-export default function CustomSearchBox({ options, setUnitListFiltered }) {
+export default function CustomSearchBox({options, setUnitListFiltered}) {
   const [searchText, setSearchText] = useState("");
   const containsText = (text, searchText) =>
     text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
   // const displayedOptions = useMemo(
-  //   () =>{
-  //     options.filter((option) => containsText(option.name, searchText))
-  //     setUnitListFiltered(options)
-  //   },
+  //   () => options.filter((option) => containsText(option.name, searchText)),
   //   [searchText]
   // );
   useEffect(() => {
-    setUnitListFiltered(options.filter((option) => containsText(option.name, searchText)))
-    // setUnitListFiltered(displayedOptions);
+    setUnitListFiltered(
+      options.filter((option) => containsText(option.name, searchText))
+    );
   }, [searchText]);
   return (
     <CustomeTextField
       size="small"
-      autoFocus={true}
+      autoFocus
       placeholder="Type to search..."
       fullWidth
       smoothCorners={12}
@@ -34,11 +32,6 @@ export default function CustomSearchBox({ options, setUnitListFiltered }) {
         ),
       }}
       onChange={(e) => setSearchText(e.target.value)}
-      // onChange={(e) => {
-      //   options.filter((option) => containsText(option.name, e.target.value));
-      //   setUnitListFiltered(options.filter((option) => containsText(option.name, e.target.value)));
-      //   console.log(options);
-      // }}
       onKeyDown={(e) => {
         if (e.key !== "Escape") {
           e.stopPropagation();
