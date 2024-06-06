@@ -1,5 +1,5 @@
 "use client";
-import { Stack, InputAdornment } from "@mui/material";
+import { Stack, InputAdornment, Typography } from "@mui/material";
 import TableComponent from "../components/TableComponent";
 import { useState } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
@@ -17,14 +17,33 @@ import {
   DashPaperPagination,
 } from "../components/DashPaper";
 import PriceAction from "./components/PriceAction";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
   const rowPerPage = 10;
+  const CustomerComp = ({ id, row }) => {
+    return (
+      <Stack>
+        <Typography variant="body1" fontSize={"16px"}>
+          {row.customer}
+        </Typography>
+        <Typography variant="body2" fontSize={"12px"}>
+          {row.phone}
+        </Typography>
+      </Stack>
+    );
+  };
   const headList = [
     { title: "Invoice", key: "invoiceNo", type: "string" },
-    { title: "Customer", key: "customer", type: "string" },
+    {
+      title: "Customer",
+      key: "customer",
+      type: "action",
+      actionComp: CustomerComp,
+    },
     { title: "Date", key: "date", type: "string" },
     { title: "Amount", key: "amount", type: "action", actionComp: PriceAction },
     {
@@ -48,6 +67,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "pending",
+      phone: "+919876543210",
     },
     {
       id: "02",
@@ -56,6 +76,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "paid",
+      phone: "+919876543210",
     },
     {
       id: "03",
@@ -64,6 +85,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "pending",
+      phone: "+919876543210",
     },
     {
       id: "04",
@@ -72,6 +94,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "partiallypaid",
+      phone: "+919876543210",
     },
     {
       id: "05",
@@ -80,6 +103,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "paid",
+      phone: "+919876543210",
     },
     {
       id: "06",
@@ -88,6 +112,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "partiallypaid",
+      phone: "+919876543210",
     },
     {
       id: "07",
@@ -96,6 +121,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "pending",
+      phone: "+919876543210",
     },
     {
       id: "08",
@@ -104,6 +130,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "paid",
+      phone: "+919876543210",
     },
     {
       id: "09",
@@ -112,6 +139,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "pending",
+      phone: "+919876543210",
     },
     {
       id: "10",
@@ -120,6 +148,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "pending",
+      phone: "+919876543210",
     },
     {
       id: "11",
@@ -128,6 +157,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "paid",
+      phone: "+919876543210",
     },
     {
       id: "12",
@@ -136,6 +166,7 @@ export default function Page() {
       date: "02-02-2024",
       amount: 1020,
       status: "partiallypaid",
+      phone: "+919876543210",
     },
   ];
   return (
@@ -167,6 +198,7 @@ export default function Page() {
             height={"40px"}
             width={"160px"}
             startIcon={<AddCircleIcon />}
+            onClick={() => router.push("/dashboard/invoice/create")}
           >
             Add Invoice
           </CustomeButton>
