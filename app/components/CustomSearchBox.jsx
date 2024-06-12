@@ -3,7 +3,7 @@ import CustomeTextField from "./CustomeTextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useMemo, useEffect } from "react";
 
-export default function CustomSearchBox({options, setUnitListFiltered}) {
+export default function CustomSearchBox({ options, setUnitListFiltered }) {
   const [searchText, setSearchText] = useState("");
   const containsText = (text, searchText) =>
     text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
@@ -12,10 +12,13 @@ export default function CustomSearchBox({options, setUnitListFiltered}) {
   //   [searchText]
   // );
   useEffect(() => {
-    setUnitListFiltered(
-      options.filter((option) => containsText(option.name, searchText))
-    );
+    if (options) {
+      setUnitListFiltered(
+        options.filter((option) => containsText(option.name, searchText))
+      );
+    }
   }, [searchText]);
+
   return (
     <CustomeTextField
       size="small"

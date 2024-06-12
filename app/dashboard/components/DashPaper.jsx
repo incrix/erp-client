@@ -26,7 +26,7 @@ export function DashPaperLayout({ children }) {
       <Stack direction={"column"}>
         {children.find((child) => child.type === DashPaperAction)}
       </Stack>
-      <Stack direction={"column"} margin={"0 20px"}>
+      <Stack direction={"column"} margin={"0 20px"} height={"100%"}>
         {children.find((child) => child.type === DashPaperBody)}
       </Stack>
       <Stack direction={"column"} marginTop={"auto"}>
@@ -65,8 +65,8 @@ export function DashPaperAction({ children }) {
   return <Stack>{children}</Stack>;
 }
 
-export function DashPaperBody({ children }) {
-  return <Stack>{children}</Stack>;
+export function DashPaperBody(props) {
+  return <Stack {...props}>{props.children}</Stack>;
 }
 
 export function DashPaperFooter({ children, caption }) {

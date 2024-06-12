@@ -10,7 +10,10 @@ export default function CustomSelect({
   renderMenuItem,
   listSubheader,
   border,
-  startAdornment
+  startAdornment,
+  color,
+  fill,
+  borderRadius
 }) {
   return (
     <Select
@@ -19,13 +22,21 @@ export default function CustomSelect({
       renderValue={(selected) => {
         if (selected.length === 0) {
           return (
-            <Typography variant="p" color={"#82878C"} fontSize={14}>
+            <Typography
+              variant="p"
+              color={color ? color : "#82878C"}
+              fontSize={14}
+            >
               {placeholder}
             </Typography>
           );
         }
         return (
-          <Typography variant="p" color={"#82878C"} fontSize={14}>
+          <Typography
+            variant="p"
+            color={color ? color : "#82878C"}
+            fontSize={14}
+          >
             {selected}
           </Typography>
         );
@@ -36,7 +47,7 @@ export default function CustomSelect({
           style: {
             maxHeight: 300,
             width: width,
-            borderRadius: "15px",
+            borderRadius: borderRadius ? borderRadius : "15px",
             backgroundColor: "white",
           },
           sx: {
@@ -77,6 +88,9 @@ export default function CustomSelect({
           "&:hover fieldset": {
             borderColor: "#000E33",
           },
+        },
+        ".MuiSvgIcon-root ": {
+          fill: fill,
         },
       }}
       onChange={onChange}

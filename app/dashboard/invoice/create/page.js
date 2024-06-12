@@ -15,7 +15,9 @@ export default function Page() {
       <DashPaperLayout>
         <DashPaperHead title={"Create Invoice #INV-01"}>
         </DashPaperHead>
-        <DashPaperBody>
+        <DashPaperBody sx={{
+          height: "100%",
+        }}>
             <CreateInvoiceBody />
         </DashPaperBody>
       </DashPaperLayout>

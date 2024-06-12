@@ -12,7 +12,9 @@ export default function CustomeTextField(props) {
         }}
         {...props}
         sx={{
+          textAlign:props.textAlign,
           "& .MuiOutlinedInput-root": {
+            p:props.p,
             height: props.height,
             width: props.width,
             "& fieldset": {
