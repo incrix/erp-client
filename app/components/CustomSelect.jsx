@@ -1,4 +1,4 @@
-import { Typography, Select } from "@mui/material";
+import { Typography, Select, MenuItem } from "@mui/material";
 
 export default function CustomSelect({
   onChange,
@@ -13,14 +13,15 @@ export default function CustomSelect({
   startAdornment,
   color,
   fill,
-  borderRadius
+  borderRadius,
 }) {
   return (
     <Select
       displayEmpty
       value={value}
       renderValue={(selected) => {
-        if (selected.length === 0) {
+        console.log(typeof selected);
+        if (selected != undefined && selected.length === 0) {
           return (
             <Typography
               variant="p"
@@ -97,9 +98,11 @@ export default function CustomSelect({
     >
       {listSubheader}
       {options.length != 0 ? null : (
-        <Typography width={"100%"} textAlign={"center"} padding={"10px 0 "}>
-          No {placeholder}
-        </Typography>
+        <MenuItem disabled>
+          <Typography width={"100%"} textAlign={"center"} padding={"10px 0 "} fontWeight={600}>
+            No {placeholder}
+          </Typography>
+        </MenuItem>
       )}
       {options.map((option) => renderMenuItem(option))}
     </Select>

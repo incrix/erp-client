@@ -1,5 +1,5 @@
 "use client";
-import { Stack, InputAdornment } from "@mui/material";
+import { Stack, InputAdornment, LinearProgress } from "@mui/material";
 import TableComponent from "../components/TableComponent";
 import SalesButton from "./components/SalesButton";
 import ActionButton from "./components/ActionButton";
@@ -11,23 +11,50 @@ import {
   DashPaperBody,
   DashPaperFooter,
   DashPaperPagination,
+  DashPaperAction,
 } from "../components/DashPaper";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import CustomeButton from "@/app/components/CustomeButton";
 import CustomeTextField from "@/app/components/CustomeTextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateProductList } from "@/redux/features/productList";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const rowPerPage = 10;
   const route = useRouter();
+  const productList = useSelector((state) => state.productList);
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  // const searchParams = useSearchParams();
+  // const search = searchParams.get("refresh");
+  const updateList = async () => {
+    await fetch("/api/product/get-all-products")
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        dispatch(
+          updateProductList({
+            data: data.data,
+          })
+        );
+      });
+  };
+
+  useEffect(() => {
+    productList.length == 0 && isLoading && updateList();
+    if (productList.length > 0) setIsLoading(false);
+  });
+
   const headList = [
     { title: "Name", key: "name", type: "string" },
-    { title: "Price", key: "price", type: "string" },
-    { title: "Category", key: "category", type: "string" },
-    { title: "Stock", key: "stock", type: "string" },
+    { title: "Price", key: "priceWithTax", type: "string" },
+    { title: "Category", key: "catName", type: "string" },
+    { title: "Stock", key: "stockQty", type: "string" },
     { title: "Sales", key: "isSales", type: "action", actionComp: SalesButton },
     {
       title: "Actions",
@@ -36,6 +63,7 @@ export default function Page() {
       actionComp: ActionButton,
     },
   ];
+
   const rows = [
     {
       id: "01",
@@ -171,20 +199,25 @@ export default function Page() {
           </CustomeButton>
         </DashPaperHead>
         <DashPaperBody>
-          <TableComponent
-            headList={headList}
-            rows={rows}
-            currentPage={currentPage}
-            rowPerPage={rowPerPage}
-            height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
-          />
+          {isLoading ? (
+            <LinearProgress />
+          ) : (
+            <TableComponent
+              title={"Product"}
+              headList={headList}
+              rows={productList}
+              currentPage={currentPage}
+              rowPerPage={rowPerPage}
+              height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
+            />
+          )}
         </DashPaperBody>
         <DashPaperFooter>
           <DashPaperPagination
             currentPage={currentPage}
             rowPerPage={rowPerPage}
             setCurrentPage={setCurrentPage}
-            rowLength={rows.length}
+            rowLength={productList.length}
           />
         </DashPaperFooter>
       </DashPaperLayout>

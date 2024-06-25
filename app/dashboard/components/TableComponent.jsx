@@ -49,6 +49,7 @@ export default function TableComponent({
   height,
   currentPage,
   rowPerPage,
+  title,
 }) {
   const rowsPerPage = rows.slice(
     (currentPage - 1) * rowPerPage,
@@ -76,6 +77,11 @@ export default function TableComponent({
     >
       <SmoothCorners style={{ display: "none" }} />
       <Table dense table size="small">
+        {rows.length == 0 ? (
+          <caption style={{ textAlign: "center" }}>
+            No {title} available
+          </caption>
+        ) : null}
         <TableHead
           sx={{
             height: "55px",
@@ -92,7 +98,6 @@ export default function TableComponent({
         </TableHead>
         <TableBody>
           {rowsPerPage.map((row) => {
-            console.log(row);
             return (
               <StyledTableRow
                 key={row.id}

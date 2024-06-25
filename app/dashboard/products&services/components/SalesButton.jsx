@@ -2,11 +2,12 @@
 import { useState } from "react";
 import CustomeSwitch from "@/app/components/CustomeSwitch";
 
-export default function SalesButton({ id, value }) {
-  const [ischecked, setIsChecked] = useState(value)
+export default function SalesButton({ id, row }) {
+  const [ischecked, setIsChecked] = useState(row.isSales);
   const handleClick = (e) => {
-    setIsChecked(e.target.checked)
-    
+    setIsChecked(e.target.checked);
   };
-  return <CustomeSwitch sx={{ m: 1 }} onChange={handleClick} checked={ischecked} />;
+  return (
+    <CustomeSwitch sx={{ m: 1 }} onChange={handleClick} checked={ischecked} />
+  );
 }

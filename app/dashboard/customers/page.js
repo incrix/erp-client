@@ -16,9 +16,11 @@ import {
   DashPaperFooter,
   DashPaperPagination,
 } from "../components/DashPaper";
+import { useRouter } from "next/navigation";
 // import PriceAction from "./components/PriceAction";
 
 export default function Page() {
+  const router = useRouter();
   const { height, width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
   const rowPerPage = 10;
@@ -161,6 +163,7 @@ export default function Page() {
             height={"40px"}
             width={"180px"}
             startIcon={<AddCircleIcon />}
+            onClick={() => router.push("/dashboard/customers/create")}
           >
             Add Customer
           </CustomeButton>

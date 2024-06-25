@@ -1,5 +1,5 @@
 "use client";
-import { Stack, Typography, MenuItem, ListSubheader } from "@mui/material";
+import { Stack, Typography, MenuItem, ListSubheader, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from "@mui/material";
 import CustomeTextField from "@/app/components/CustomeTextField";
 import { useState, useEffect } from "react";
 import CustomSelect from "@/app/components/CustomSelect";
@@ -18,7 +18,14 @@ export default function CreateProductForm({
   onChangeProductValue,
 }) {
   const [unitListFiltered, setUnitListFiltered] = useState(unitList);
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   const renderUnitMenuItem = (option) => {
     return (
       <MenuItem
@@ -47,6 +54,7 @@ export default function CreateProductForm({
   };
   return (
     <Stack gap={2}>
+      <AddCatDilogForm open={open} handleClose={handleClose}/>
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
         Basic Details
       </Typography>
@@ -86,7 +94,7 @@ export default function CreateProductForm({
           borderWidth="1px"
           type="number"
           onChange={(e) => {
-            onChangeProductValue("sellingPrice", e.target.value);
+            onChangeProductValue("unitPrice", eval(e.target.value));
           }}
           InputProps={{
             startAdornment: (
@@ -102,13 +110,11 @@ export default function CreateProductForm({
               <CustomSelect
                 onChange={(event) => {
                   onChangeProductValue(
-                    "sellingPriceWithTax",
+                    "withinTax",
                     event.target.value == "Within Tax" ? true : false
                   );
                 }}
-                value={
-                  newProduct.sellingPriceWithTax ? "Within Tax" : "Without Tax"
-                }
+                value={newProduct.withinTax ? "Within Tax" : "Without Tax"}
                 border={"none"}
                 placeholder={"Without Tax"}
                 options={["Without Tax", "Within Tax"]}
@@ -121,7 +127,7 @@ export default function CreateProductForm({
         />
         <CustomSelect
           onChange={(event) => {
-            onChangeProductValue("taxRate", event.target.value);
+            onChangeProductValue("taxRate", eval(event.target.value));
           }}
           value={newProduct.taxRate === 0 ? "" : newProduct.taxRate}
           placeholder={"Tax %"}
@@ -142,7 +148,7 @@ export default function CreateProductForm({
           onChange={(e) => {
             console.log(e.target.value);
             onChangeProductValue("discount", {
-              value: e.target.value,
+              value: eval(e.target.value),
               type: newProduct.discount.type,
             });
           }}
@@ -234,14 +240,20 @@ export default function CreateProductForm({
           }}
           value={newProduct.categoryId}
           placeholder={"Category"}
-          options={[]}
+          options={["Apple", "Android"]}
           width={"300px"}
           height={"40px"}
           renderMenuItem={(option) => {
-            return option ? (
-              <MenuItem>No Category</MenuItem>
-            ) : (
-              <MenuItem>No Category</MenuItem>
+            return (
+              <MenuItem
+                onKeyDown={(e) => e.stopPropagation()}
+                key={option}
+                value={option}
+              >
+                <Typography width={"100%"} color={"#97A1B1"}>
+                  {option}
+                </Typography>
+              </MenuItem>
             );
           }}
           startAdornment={
@@ -269,6 +281,7 @@ export default function CreateProductForm({
                   width="100%"
                   smoothCorners="15"
                   backgroundColor="#97A1B1"
+                  onClick={handleClickOpen}
                 >
                   Add Catagory
                 </CustomeButton>
@@ -297,7 +310,7 @@ export default function CreateProductForm({
             ),
           }}
           onChange={(e) => {
-            onChangeProductValue("buyingPrice", e.target.value);
+            onChangeProductValue("buyingPrice", eval(e.target.value));
           }}
         />
         <CustomeTextField
@@ -318,7 +331,7 @@ export default function CreateProductForm({
             ),
           }}
           onChange={(e) => {
-            onChangeProductValue("stock", e.target.value);
+            onChangeProductValue("stockQty", eval(e.target.value));
           }}
           type="number"
         />
@@ -326,6 +339,50 @@ export default function CreateProductForm({
     </Stack>
   );
 }
+
+function AddCatDilogForm({open,handleClose}){
+  return(
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries(formData.entries());
+            const email = formJson.email;
+            console.log(email);
+            handleClose();
+          },
+        }}
+      >
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We
+            will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="email"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Subscribe</Button>
+        </DialogActions>
+      </Dialog>
+  )
+}
+
 
 const taxList = [
   "5",
