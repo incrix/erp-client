@@ -1,12 +1,12 @@
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomStack from "@/app/components/CustomStack";
+import CustomTextField from "@/app/components/CustomTextField";
 import { Stack, Typography } from "@mui/material";
 import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
-import CustomeSwitch from "@/app/components/CustomeSwitch";
+import CustomeSwitch from "@/app/components/CustomSwitch";
 
 export default function AddPayment() {
     return (
-      <CustomeStack
+      <CustomStack
         gap={1}
         justifyContent={"center"}
         width="100%"
@@ -47,7 +47,7 @@ export default function AddPayment() {
           </Stack>
         </Stack>
         <Stack direction={"row"} alignItems={"center"} gap={2}>
-          <CustomeTextField
+          <CustomTextField
             height={"40px"}
             smoothCorners={15}
             placeholder="Enter Amount"
@@ -66,7 +66,7 @@ export default function AddPayment() {
               ),
             }}
           />
-          <CustomeTextField
+          <CustomTextField
             height={"40px"}
             smoothCorners={15}
             fullWidth
@@ -75,6 +75,6 @@ export default function AddPayment() {
             type="text"
           />
         </Stack>
-      </CustomeStack>
+      </CustomStack>
     );
   }

@@ -1,7 +1,7 @@
 import CustomSelect from "@/app/components/CustomSelect";
-import CustomeButton from "@/app/components/CustomeButton";
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomButton from "@/app/components/CustomButton";
+import CustomStack from "@/app/components/CustomStack";
+import CustomTextField from "@/app/components/CustomTextField";
 import Icons from "@/util/icons";
 import { MenuItem, Stack, Typography } from "@mui/material";
 import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
@@ -19,7 +19,7 @@ export default function SelectProduct() {
       );
     };
     return (
-      <CustomeStack
+      <CustomStack
         gap={1}
         justifyContent={"center"}
         width="100%"
@@ -38,7 +38,7 @@ export default function SelectProduct() {
           Add Product
         </Typography>
         <Stack direction={"row"} gap={2} alignItems={"center"}>
-          <CustomeTextField
+          <CustomTextField
             width={"400px"}
             height={"40px"}
             smoothCorners={15}
@@ -68,7 +68,7 @@ export default function SelectProduct() {
               ),
             }}
           />
-          <CustomeButton
+          <CustomButton
             smoothCorners={10}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -79,8 +79,8 @@ export default function SelectProduct() {
             // onClick={() => router.push("/dashboard/invoice/create")}
           >
             Scan code
-          </CustomeButton>
+          </CustomButton>
         </Stack>
-      </CustomeStack>
+      </CustomStack>
     );
   }

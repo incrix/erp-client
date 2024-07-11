@@ -2,12 +2,12 @@
 import { Button } from "@mui/material";
 import { SmoothCorners } from "react-smooth-corners";
 
-export default function CustomeButton(props) {
+export default function CustomButton(props) {
   return (
     <>
       <SmoothCorners style={{ display: "none" }} />
       <Button
-        variant="contained"
+        variant={props.variant || "contained"}
         color="primary"
         {...props}
         sx={{

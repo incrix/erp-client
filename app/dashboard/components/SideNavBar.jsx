@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import NavButton from "./NavButton";
 import { IncrixLogoLight } from "@/util/incrix-logo";
 import Icons from "@/util/icons";
@@ -18,7 +18,7 @@ import UserInfoButton from "./UserInfoButton";
 export default function SideNavBar() {
   return (
     <Stack width={"300px"} p={2} height={"100%"}>
-      <CustomeStack
+      <CustomStack
         background="#000E33"
         smoothCorners={"28"}
         width="100%"
@@ -104,7 +104,7 @@ export default function SideNavBar() {
           />
         </Stack>
         <UserInfoButton  />
-      </CustomeStack>
+      </CustomStack>
     </Stack>
   );
 }

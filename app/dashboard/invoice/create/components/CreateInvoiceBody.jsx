@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomStack from "@/app/components/CustomStack";
+import CustomButton from "@/app/components/CustomButton";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import SelectCustomer from "./SelectCustomer";
 import SelectProduct from "./SelectProduct";
@@ -54,7 +54,7 @@ export default function CreateInvoiceBody() {
         <Grid xl={7}>
           <ItemList />
           <InvoiceSummary />
-          <CustomeButton
+          <CustomButton
             smoothCorners={20}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -64,7 +64,7 @@ export default function CreateInvoiceBody() {
             // onClick={() => router.push("/dashboard/invoice/create")}
           >
             Complete
-          </CustomeButton>
+          </CustomButton>
         </Grid>
       </Grid>
     </Stack>

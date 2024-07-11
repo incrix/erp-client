@@ -1,7 +1,7 @@
 "use client";
 import { Stack, InputAdornment } from "@mui/material";
-import CustomeButton from "@/app/components/CustomeButton";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomButton from "@/app/components/CustomButton";
+import CustomTextField from "@/app/components/CustomTextField";
 import atIcon from "../../../public/icons/at.png";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ export default function SignInForm({setVerify}) {
   };
   return (
     <Stack gap={2}>
-      <CustomeTextField
+      <CustomTextField
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -43,7 +43,7 @@ export default function SignInForm({setVerify}) {
         height={50}
         placeholder="Email address or mobile number"
       />
-      <CustomeButton
+      <CustomButton
         smoothCorners={18}
         fullWidth={true}
         backgroundColor={"#000E33"}
@@ -52,7 +52,7 @@ export default function SignInForm({setVerify}) {
         // width={"300px"}
       >
         Continue to verify
-      </CustomeButton>
+      </CustomButton>
     </Stack>
   );
 }

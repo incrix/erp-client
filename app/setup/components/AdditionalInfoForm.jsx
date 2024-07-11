@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomStack from "@/app/components/CustomStack";
+import CustomButton from "@/app/components/CustomButton";
 import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
@@ -69,7 +69,7 @@ function SelectAvatar({ setUpBusinessDetails, businessDetails }) {
         Select avatar for your profile
       </Typography>
       <Stack gap={1} direction={"row"}>
-        <CustomeButton
+        <CustomButton
           variant="outlined"
           height={"40px"}
           width={"100%"}
@@ -80,8 +80,8 @@ function SelectAvatar({ setUpBusinessDetails, businessDetails }) {
           onClick={handleMale}
         >
           <MaleIcon />
-        </CustomeButton>
-        <CustomeButton
+        </CustomButton>
+        <CustomButton
           variant="outlined"
           height={"40px"}
           width={"100%"}
@@ -92,7 +92,7 @@ function SelectAvatar({ setUpBusinessDetails, businessDetails }) {
           onClick={handleFemale}
         >
           <FemaleIcon />
-        </CustomeButton>
+        </CustomButton>
       </Stack>
       <Stack
         gap={1}
@@ -171,7 +171,7 @@ function ImgUpload() {
           cursor: "pointer",
         }}
       >
-        <CustomeStack
+        <CustomStack
           alignItems={"center"}
           justifyContent={"center"}
           smoothCorners={"12"}
@@ -186,7 +186,7 @@ function ImgUpload() {
               fontSize: "40px",
             }}
           />
-        </CustomeStack>
+        </CustomStack>
       </label>
       <input
         type="file"

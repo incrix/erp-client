@@ -1,7 +1,7 @@
 "use client";
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import { useRouter, usePathname } from "next/navigation";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
@@ -20,7 +20,7 @@ export default function NavButton({
     setOpen(!open);
   };
   return (
-    <CustomeStack
+    <CustomStack
       background={pathname == href ? "rgba(130,135,140,30%)" : "transparent"}
       smoothCorners={"12"}
       width="100%"
@@ -76,7 +76,7 @@ export default function NavButton({
       {isChild && open && (
         <Stack>
           {childNavList.map((item) => (
-            <CustomeStack
+            <CustomStack
               background={
                 pathname == item.href ? "rgba(130,135,140,30%)" : "transparent"
               }
@@ -104,10 +104,10 @@ export default function NavButton({
               >
                 {item.title}
               </Typography>
-            </CustomeStack>
+            </CustomStack>
           ))}
         </Stack>
       )}
-    </CustomeStack>
+    </CustomStack>
   );
 }

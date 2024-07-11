@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import CustomeSwitch from "@/app/components/CustomeSwitch";
+import CustomeSwitch from "@/app/components/CustomSwitch";
 
 export default function SalesButton({ id, row }) {
   const [ischecked, setIsChecked] = useState(row.isSales);

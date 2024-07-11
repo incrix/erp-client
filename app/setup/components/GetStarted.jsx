@@ -1,7 +1,7 @@
 import setupImg from "@/public/images/setup-img.png";
 import incrixLogo from "@/public/images/incrix-logo.png";
 import { Stack, Typography } from "@mui/material";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 
 export default function GetStarted({setUpBusiness}) {
   return (
@@ -57,7 +57,7 @@ export default function GetStarted({setUpBusiness}) {
         </Typography>
       </Stack>
 
-      <CustomeButton
+      <CustomButton
         smoothCorners={12}
         width={{
             xs: "250px",
@@ -70,7 +70,7 @@ export default function GetStarted({setUpBusiness}) {
         onClick={() => setUpBusiness(true)}
       >
         Setup Business
-      </CustomeButton>
+      </CustomButton>
     </Stack>
   );
 }

@@ -1,11 +1,23 @@
 "use client";
-import { Stack, Typography, MenuItem, ListSubheader, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from "@mui/material";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import {
+  Stack,
+  Typography,
+  MenuItem,
+  ListSubheader,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  Button,
+} from "@mui/material";
+import CustomTextField from "@/app/components/CustomTextField";
 import { useState, useEffect } from "react";
 import CustomSelect from "@/app/components/CustomSelect";
 import CustomDuoButtonGroup from "@/app/components/CustomDuoButtonGroup";
 import CustomSearchBox from "@/app/components/CustomSearchBox";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
@@ -54,7 +66,7 @@ export default function CreateProductForm({
   };
   return (
     <Stack gap={2}>
-      <AddCatDilogForm open={open} handleClose={handleClose}/>
+      <AddCatDilogForm open={open} handleClose={handleClose} />
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
         Basic Details
       </Typography>
@@ -65,7 +77,7 @@ export default function CreateProductForm({
         }}
         value={newProduct.type}
       />
-      <CustomeTextField
+      <CustomTextField
         width={"300px"}
         height={"40px"}
         smoothCorners={15}
@@ -86,7 +98,7 @@ export default function CreateProductForm({
         }}
       />
       <Stack direction={"row"} gap={2}>
-        <CustomeTextField
+        <CustomTextField
           width={"300px"}
           height={"40px"}
           smoothCorners={15}
@@ -138,7 +150,7 @@ export default function CreateProductForm({
         />
       </Stack>
       <Stack direction={"row"} gap={2}>
-        <CustomeTextField
+        <CustomTextField
           width={"300px"}
           height={"40px"}
           smoothCorners={15}
@@ -212,7 +224,7 @@ export default function CreateProductForm({
         Additional Details
       </Typography>
       <Stack direction={"row"} gap={2}>
-        <CustomeTextField
+        <CustomTextField
           width={"300px"}
           height={"40px"}
           smoothCorners={15}
@@ -277,21 +289,21 @@ export default function CreateProductForm({
                   options={unitList}
                   setUnitListFiltered={setUnitListFiltered}
                 />
-                <CustomeButton
+                <CustomButton
                   width="100%"
                   smoothCorners="15"
                   backgroundColor="#97A1B1"
                   onClick={handleClickOpen}
                 >
                   Add Catagory
-                </CustomeButton>
+                </CustomButton>
               </Stack>
             </ListSubheader>
           }
         />
       </Stack>
       <Stack direction={"row"} gap={2}>
-        <CustomeTextField
+        <CustomTextField
           width={"300px"}
           height={"40px"}
           smoothCorners={15}
@@ -313,7 +325,7 @@ export default function CreateProductForm({
             onChangeProductValue("buyingPrice", eval(e.target.value));
           }}
         />
-        <CustomeTextField
+        <CustomTextField
           width={"300px"}
           height={"40px"}
           smoothCorners={15}
@@ -340,49 +352,48 @@ export default function CreateProductForm({
   );
 }
 
-function AddCatDilogForm({open,handleClose}){
-  return(
+function AddCatDilogForm({ open, handleClose }) {
+  return (
     <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
-        }}
-      >
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-  )
+      open={open}
+      onClose={handleClose}
+      PaperProps={{
+        component: "form",
+        onSubmit: (event) => {
+          event.preventDefault();
+          const formData = new FormData(event.currentTarget);
+          const formJson = Object.fromEntries(formData.entries());
+          const email = formJson.email;
+          console.log(email);
+          handleClose();
+        },
+      }}
+    >
+      <DialogTitle>Subscribe</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          To subscribe to this website, please enter your email address here. We
+          will send updates occasionally.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          required
+          margin="dense"
+          id="name"
+          name="email"
+          label="Email Address"
+          type="email"
+          fullWidth
+          variant="standard"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button type="submit">Subscribe</Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
-
 
 const taxList = [
   "5",

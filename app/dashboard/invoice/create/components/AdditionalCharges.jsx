@@ -1,16 +1,16 @@
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
 import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import RemoveCircleRoundedIcon from "@mui/icons-material/RemoveCircleRounded";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomTextField from "@/app/components/CustomTextField";
 
 export default function AdditionalCharges() {
     const [isOpen, setIsOpen] = useState(false);
   
     return (
-      <CustomeStack
+      <CustomStack
         gap={1}
         justifyContent={"center"}
         width="100%"
@@ -64,7 +64,7 @@ export default function AdditionalCharges() {
               <Typography variant="caption" color={"#82878C"}>
                 Apply discount(%) to all items?
               </Typography>
-              <CustomeTextField
+              <CustomTextField
                 height={"40px"}
                 width="120px"
                 smoothCorners={15}
@@ -77,7 +77,7 @@ export default function AdditionalCharges() {
               <Typography variant="caption" color={"#82878C"}>
                 Shipping Charges (within tax)
               </Typography>
-              <CustomeTextField
+              <CustomTextField
                 height={"40px"}
                 width="120px"
                 smoothCorners={15}
@@ -90,7 +90,7 @@ export default function AdditionalCharges() {
               <Typography variant="caption" color={"#82878C"}>
                 Packaging Charges (within tax)
               </Typography>
-              <CustomeTextField
+              <CustomTextField
                 height={"40px"}
                 width="120px"
                 smoothCorners={15}
@@ -101,6 +101,6 @@ export default function AdditionalCharges() {
             </Stack>
           </Stack>
         )}
-      </CustomeStack>
+      </CustomStack>
     );
   }

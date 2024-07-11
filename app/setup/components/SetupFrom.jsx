@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import incrixLogo from "@/public/images/incrix-logo.png";
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomStack from "@/app/components/CustomStack";
+import CustomButton from "@/app/components/CustomButton";
 import { useRouter } from 'next/navigation'
 import StepConnector, {
   stepConnectorClasses,
@@ -152,7 +152,7 @@ export default function SetupForm() {
     })
   }
   return (
-    <CustomeStack
+    <CustomStack
       smoothCorners={"26"}
       padding={{
         xs: "40px 20px",
@@ -222,7 +222,7 @@ export default function SetupForm() {
         marginTop={"auto"}
       >
         {activeStep != 0 && (
-          <CustomeButton
+          <CustomButton
             variant="outlined"
             border={"2px solid #82878C"}
             textColor={"#82878C"}
@@ -230,10 +230,10 @@ export default function SetupForm() {
             onClick={handleBack}
           >
             Back
-          </CustomeButton>
+          </CustomButton>
         )}
         {activeStep != 2 && (
-          <CustomeButton
+          <CustomButton
             onClick={handleNext}
             smoothCorners="6"
             backgroundColor={"#0080FF"}
@@ -241,10 +241,10 @@ export default function SetupForm() {
             disabled={activeStep == 0 ? checkTheBusinessState(businessDetails) : activeStep == 1 ? checkTheAddress(businessDetails) : null}
           >
             Next
-          </CustomeButton>
+          </CustomButton>
         )}
         {activeStep == 2 && (
-          <CustomeButton
+          <CustomButton
           disabled={checkTheAdditionalInfo(businessDetails)}
             smoothCorners="6"
             backgroundColor={"#0080FF"}
@@ -252,9 +252,9 @@ export default function SetupForm() {
             onClick={handleSummitDetails}
           >
             Finish
-          </CustomeButton>
+          </CustomButton>
         )}
       </Stack>
-    </CustomeStack>
+    </CustomStack>
   );
 }

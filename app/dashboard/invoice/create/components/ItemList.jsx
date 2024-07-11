@@ -1,9 +1,9 @@
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import { IconButton, MenuItem, Stack, Typography } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomTextField from "@/app/components/CustomTextField";
 import CustomSelect from "@/app/components/CustomSelect";
 
 export default function ItemList() {
@@ -22,7 +22,7 @@ export default function ItemList() {
       );
     };
     return (
-      <CustomeStack
+      <CustomStack
         gap={1}
         justifyContent={"center"}
         width="100%"
@@ -105,7 +105,7 @@ export default function ItemList() {
                   >
                     <RemoveIcon style={{ fontSize: 16 }} />
                   </IconButton>
-                  <CustomeTextField
+                  <CustomTextField
                     smoothCorners="10"
                     width="60px"
                     height="30px"
@@ -152,7 +152,7 @@ export default function ItemList() {
                 <Typography variant="caption" color={"#82878C"}>
                   Unit price
                 </Typography>
-                <CustomeTextField
+                <CustomTextField
                   smoothCorners="15"
                   height="30px"
                   width="140px"
@@ -161,7 +161,7 @@ export default function ItemList() {
                   p="0"
                   InputProps={{
                     startAdornment: (
-                      <CustomeStack
+                      <CustomStack
                         width={"60px"}
                         height={"100%"}
                         alignItems="center"
@@ -176,7 +176,7 @@ export default function ItemList() {
                         <Typography sx={{ color: "white", fontWeight: 600 }}>
                           ₹
                         </Typography>
-                      </CustomeStack>
+                      </CustomStack>
                     ),
                   }}
                 />
@@ -185,7 +185,7 @@ export default function ItemList() {
                 <Typography variant="caption" color={"#82878C"}>
                   Price with tax
                 </Typography>
-                <CustomeTextField
+                <CustomTextField
                   smoothCorners="15"
                   height="30px"
                   width="140px"
@@ -194,7 +194,7 @@ export default function ItemList() {
                   p="0"
                   InputProps={{
                     startAdornment: (
-                      <CustomeStack
+                      <CustomStack
                         width={"60px"}
                         height={"100%"}
                         alignItems="center"
@@ -209,7 +209,7 @@ export default function ItemList() {
                         <Typography sx={{ color: "white", fontWeight: 600 }}>
                           ₹
                         </Typography>
-                      </CustomeStack>
+                      </CustomStack>
                     ),
                   }}
                 />
@@ -218,7 +218,7 @@ export default function ItemList() {
                 <Typography variant="caption" color={"#82878C"}>
                   Discount
                 </Typography>
-                <CustomeTextField
+                <CustomTextField
                   smoothCorners="15"
                   width="140px"
                   height="30px"
@@ -227,7 +227,7 @@ export default function ItemList() {
                   p="0"
                   InputProps={{
                     startAdornment: (
-                      <CustomeStack
+                      <CustomStack
                         width={"100px"}
                         height={"100%"}
                         alignItems="center"
@@ -252,7 +252,7 @@ export default function ItemList() {
                           fill="white"
                           renderMenuItem={renderTaxMenuItem}
                         />
-                      </CustomeStack>
+                      </CustomStack>
                     ),
                   }}
                 />
@@ -261,7 +261,7 @@ export default function ItemList() {
                 <Typography variant="caption" color={"#82878C"}>
                   Total
                 </Typography>
-                <CustomeTextField
+                <CustomTextField
                   smoothCorners="15"
                   width="140px"
                   height="30px"
@@ -270,7 +270,7 @@ export default function ItemList() {
                   p="0"
                   InputProps={{
                     startAdornment: (
-                      <CustomeStack
+                      <CustomStack
                         width={"60px"}
                         height={"100%"}
                         alignItems="center"
@@ -285,7 +285,7 @@ export default function ItemList() {
                         <Typography sx={{ color: "white", fontWeight: 600 }}>
                           ₹
                         </Typography>
-                      </CustomeStack>
+                      </CustomStack>
                     ),
                   }}
                 />
@@ -303,6 +303,6 @@ export default function ItemList() {
             />
           </Stack>
         </Stack>
-      </CustomeStack>
+      </CustomStack>
     );
   }

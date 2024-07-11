@@ -1,20 +1,20 @@
 import { TextField } from "@mui/material";
 import { SmoothCorners } from "react-smooth-corners";
 
-export default function CustomeTextField(props) {
+export default function CustomTextField(props) {
   return (
     <>
       <SmoothCorners style={{ display: "none" }} />
       <TextField
         variant="outlined"
         inputProps={{
-          style: { color: "#82878C", fontSize: "16px", fontWeight: "400",  },
+          style: { color: "#82878C", fontSize: "16px", fontWeight: "400" },
         }}
         {...props}
         sx={{
-          textAlign:props.textAlign,
+          textAlign: props.textAlign,
           "& .MuiOutlinedInput-root": {
-            p:props.p,
+            p: props.p,
             height: props.height,
             width: props.width,
             "& fieldset": {
@@ -32,7 +32,7 @@ export default function CustomeTextField(props) {
               borderColor: "#000E33",
             },
           },
-          ...props.sx
+          ...props.sx,
         }}
       >
         {props.children}

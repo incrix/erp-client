@@ -14,8 +14,8 @@ import {
   DashPaperAction,
 } from "../components/DashPaper";
 import useWindowDimensions from "@/util/useWindowDimensions";
-import CustomeButton from "@/app/components/CustomeButton";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomButton from "@/app/components/CustomButton";
+import CustomTextField from "@/app/components/CustomTextField";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -166,7 +166,7 @@ export default function Page() {
     <Stack height={"100%"}>
       <DashPaperLayout>
         <DashPaperHead title={"Product & Services"}>
-          <CustomeTextField
+          <CustomTextField
             id="product"
             name="Product"
             InputProps={{
@@ -183,7 +183,7 @@ export default function Page() {
             borderRadius="8px"
             placeholder={"Search"}
           />
-          <CustomeButton
+          <CustomButton
             smoothCorners={10}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -196,7 +196,7 @@ export default function Page() {
             startIcon={<AddCircleIcon />}
           >
             Add Product
-          </CustomeButton>
+          </CustomButton>
         </DashPaperHead>
         <DashPaperBody>
           {isLoading ? (

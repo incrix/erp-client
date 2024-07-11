@@ -1,4 +1,4 @@
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomTextField from "@/app/components/CustomTextField";
 import { Stack, Autocomplete, Checkbox, Popper } from "@mui/material";
 import { useEffect, useState } from "react";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
@@ -15,7 +15,7 @@ export default function BusinessInfoForm({
   };
   return (
     <Stack gap={2}>
-      <CustomeTextField
+      <CustomTextField
         fullWidth={true}
         smoothCorners={18}
         value={businessDetails.orgName == "" ? "" : businessDetails.orgName}
@@ -45,7 +45,7 @@ export default function BusinessInfoForm({
         sx={{ width: "100%" }}
         popupIcon={<KeyboardArrowDownRoundedIcon />}
         renderInput={(params) => (
-          <CustomeTextField
+          <CustomTextField
             {...params}
             fullWidth={true}
             smoothCorners={18}
@@ -53,7 +53,7 @@ export default function BusinessInfoForm({
           />
         )}
       />
-      <CustomeTextField
+      <CustomTextField
         fullWidth={true}
         smoothCorners={18}
         placeholder="Organization phone number"
@@ -65,7 +65,7 @@ export default function BusinessInfoForm({
           }));
         }}
       />
-      <CustomeTextField
+      <CustomTextField
         fullWidth={true}
         smoothCorners={18}
         placeholder="Organization email address"
@@ -100,7 +100,7 @@ export default function BusinessInfoForm({
           </p>
         </Stack>
         {checked && (
-          <CustomeTextField
+          <CustomTextField
             fullWidth={true}
             smoothCorners={18}
             placeholder="Organization GST"

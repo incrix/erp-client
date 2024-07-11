@@ -1,11 +1,13 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Stack } from "@mui/material";
+import bgSvg from "@/public/landing/bg.svg";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport = {
-  themeColor: '#0080FF',
-}
+  themeColor: "#0080FF",
+};
 
 export const metadata = {
   title: "Incrix ERP",
@@ -36,7 +38,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={inter.className}
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          scrollBehavior: "smooth",
+        }}
+      >
+        {children}
+      </body>
     </html>
   );
 }

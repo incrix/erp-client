@@ -1,10 +1,10 @@
 import { Stack, Popover, Grid, Paper } from "@mui/material";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 import { useState } from "react";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 import NavButton from "./NavButton";
 import Icons from "@/util/icons";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 
 export default function MasterAddButton() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,7 +20,7 @@ export default function MasterAddButton() {
   const id = open ? "simple-popover" : undefined;
   return (
     <Stack>
-      <CustomeButton
+      <CustomButton
         startIcon={<AddSharpIcon />}
         smoothCorners={8}
         backgroundColor={"#0080FF"}
@@ -28,7 +28,7 @@ export default function MasterAddButton() {
         onClick={handleClick}
       >
         Add
-      </CustomeButton>
+      </CustomButton>
       <Popover
         id={id}
         open={open}
@@ -53,7 +53,7 @@ export default function MasterAddButton() {
           },
         }}
       >
-          <CustomeStack smoothCorners="10" background="white" sx={{padding:"20px"}} >
+          <CustomStack smoothCorners="10" background="white" sx={{padding:"20px"}} >
             <Grid container spacing={1}>
               <Grid item xs={6}>
                 <NavButton
@@ -90,7 +90,7 @@ export default function MasterAddButton() {
                 />
               </Grid>
             </Grid>
-          </CustomeStack>
+          </CustomStack>
       </Popover>
     </Stack>
   );

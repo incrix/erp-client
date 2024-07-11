@@ -7,8 +7,8 @@ import ActionButton from "./components/ActionButton";
 // import PaymentStatus from "./components/PaymentStatus";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import CustomeButton from "@/app/components/CustomeButton";
-import CustomeTextField from "@/app/components/CustomeTextField";
+import CustomButton from "@/app/components/CustomButton";
+import CustomTextField from "@/app/components/CustomTextField";
 import {
   DashPaperLayout,
   DashPaperHead,
@@ -138,7 +138,7 @@ export default function Page() {
     <Stack height={"100%"}>
       <DashPaperLayout>
         <DashPaperHead title={"Customers"}>
-          <CustomeTextField
+          <CustomTextField
             id="customers"
             name="Customers"
             InputProps={{
@@ -155,7 +155,7 @@ export default function Page() {
             borderRadius="8px"
             placeholder={"Search"}
           />
-          <CustomeButton
+          <CustomButton
             smoothCorners={10}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -166,7 +166,7 @@ export default function Page() {
             onClick={() => router.push("/dashboard/customers/create")}
           >
             Add Customer
-          </CustomeButton>
+          </CustomButton>
         </DashPaperHead>
         <DashPaperBody>
           <TableComponent

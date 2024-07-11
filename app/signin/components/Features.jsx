@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import signUpImg from "@/public/images/signup-img-1.png";
 
 export default function Features() {
@@ -14,7 +14,7 @@ export default function Features() {
         alignItems: "center",
       }}
     >
-      <CustomeStack
+      <CustomStack
         background="linear-gradient(180deg, #2164BE 20%, #009BFF 90%)"
         smoothCorners={"40"}
         width="100%"
@@ -62,7 +62,7 @@ export default function Features() {
             />
           </Stack>
         </Stack>
-      </CustomeStack>
+      </CustomStack>
     </aside>
   );
 }

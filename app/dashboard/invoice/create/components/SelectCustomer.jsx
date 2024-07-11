@@ -1,15 +1,15 @@
 import CustomSelect from "@/app/components/CustomSelect";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import { ListSubheader, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import CustomSearchBox from "@/app/components/CustomSearchBox";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 
 export default function SelectCustomer() {
   const [value, setValue] = useState("");
   return (
-    <CustomeStack
+    <CustomStack
       gap={1}
       justifyContent={"center"}
       width="100%"
@@ -56,13 +56,13 @@ export default function SelectCustomer() {
                 // options={unitList}
                 // setUnitListFiltered={setUnitListFiltered}
                 />
-                <CustomeButton
+                <CustomButton
                   width="100%"
                   smoothCorners="15"
                   backgroundColor="#97A1B1"
                 >
                   Add Customer
-                </CustomeButton>
+                </CustomButton>
               </Stack>
             </ListSubheader>
           }
@@ -89,6 +89,6 @@ export default function SelectCustomer() {
           }}
         />
       </Stack>
-    </CustomeStack>
+    </CustomStack>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { Stack, Typography, Popover } from "@mui/material";
 import { useState } from "react";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import Avatar from "@/util/avatar";
 import NavButton from "./NavButton";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
@@ -26,7 +26,7 @@ export default function UserInfoButton() {
 
   return (
     <Stack position="relative">
-      <CustomeStack
+      <CustomStack
         aria-describedby={id}
         background={"rgba(130,135,140,30%)"}
         smoothCorners={"12"}
@@ -60,7 +60,7 @@ export default function UserInfoButton() {
         <Typography variant="h6" fontSize={"16px"} color={"white"}>
           Avinash Sethu
         </Typography>
-      </CustomeStack>
+      </CustomStack>
       <Popover
         id={id}
         open={open}
@@ -85,7 +85,7 @@ export default function UserInfoButton() {
           horizontal: "center",
         }}
       >
-        <CustomeStack
+        <CustomStack
           smoothCorners={"12"}
           gap={0.5}
           alignItems={"center"}
@@ -129,7 +129,7 @@ export default function UserInfoButton() {
             }
             title={"Logout"}
           />
-        </CustomeStack>
+        </CustomStack>
       </Popover>
     </Stack>
   );

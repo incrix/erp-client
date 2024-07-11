@@ -2,7 +2,7 @@
 import { Stack } from "@mui/material";
 import { SmoothCorners } from "react-smooth-corners";
 
-export default function CustomeStack(props) {
+export default function CustomStack(props) {
   return (
     <>
       <SmoothCorners style={{ display: "none" }} />

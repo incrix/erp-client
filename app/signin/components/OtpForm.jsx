@@ -4,7 +4,7 @@ import { SmoothCorners } from "react-smooth-corners";
 import React, { useState, } from "react";
 import { useRouter } from 'next/navigation'
 import { Stack, Button } from "@mui/material";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 
 export default function OtpForm() {
   const [otp, setOtp] = useState("");
@@ -70,7 +70,7 @@ export default function OtpForm() {
         }}
       />
 
-      <CustomeButton
+      <CustomButton
         smoothCorners={18}
         fullWidth={true}
         backgroundColor={"#0080FF"}
@@ -79,7 +79,7 @@ export default function OtpForm() {
         // width={"300px"}
       >
         Continue to verify
-      </CustomeButton>
+      </CustomButton>
 
       <Stack justifyContent={"center"} alignItems={"center"}>
         <Button

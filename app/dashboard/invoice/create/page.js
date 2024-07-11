@@ -8,7 +8,7 @@ import {
   DashPaperPagination,
 } from "../../components/DashPaper";
 import CreateInvoiceBody from "./components/CreateInvoiceBody";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomButton from "@/app/components/CustomButton";
 import { useState } from "react";
 
 export default function Page() {
@@ -60,7 +60,7 @@ export default function Page() {
             </Typography>
             <Typography fontSize={18}>₹{1000}</Typography>
           </Stack>
-          <CustomeButton
+          <CustomButton
             smoothCorners={20}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -70,7 +70,7 @@ export default function Page() {
             // onClick={() => router.push("/dashboard/invoice/create")}
           >
             Complete
-          </CustomeButton>
+          </CustomButton>
         </DashPaperHead>
         <DashPaperBody
           sx={{

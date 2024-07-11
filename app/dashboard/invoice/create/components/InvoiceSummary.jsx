@@ -1,9 +1,9 @@
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 import { Stack, Typography } from "@mui/material";
 
 export default function InvoiceSummary() {
     return (
-      <CustomeStack
+      <CustomStack
         gap={1}
         justifyContent={"center"}
         width="100%"
@@ -104,6 +104,6 @@ export default function InvoiceSummary() {
             ₹{5110}
           </Typography>
         </Stack>
-      </CustomeStack>
+      </CustomStack>
     );
   }

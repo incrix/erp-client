@@ -2,7 +2,7 @@ import { IconButton, Popover, Stack, Typography } from "@mui/material";
 import NotificationsSharpIcon from "@mui/icons-material/NotificationsSharp";
 import { useState } from "react";
 import { SmoothCorners } from "react-smooth-corners";
-import CustomeStack from "@/app/components/CustomeStack";
+import CustomStack from "@/app/components/CustomStack";
 
 export default function NotificationButton() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -76,12 +76,12 @@ export default function NotificationButton() {
             border: "none",
           }}
         />
-        <CustomeStack
+        <CustomStack
           smoothCorners="32"
           background="#F8F8F8"
           width="100%"
           height="523px"
-        ></CustomeStack>
+        ></CustomStack>
       </Popover>
     </Stack>
   );

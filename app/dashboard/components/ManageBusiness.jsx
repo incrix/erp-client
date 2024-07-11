@@ -3,8 +3,8 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState, useEffect } from "react";
 import { SmoothCorners } from "react-smooth-corners";
-import CustomeStack from "@/app/components/CustomeStack";
-import CustomeButton from "@/app/components/CustomeButton";
+import CustomStack from "@/app/components/CustomStack";
+import CustomButton from "@/app/components/CustomButton";
 import AddSharpIcon from "@mui/icons-material/AddSharp";
 
 import { useDispatch } from "react-redux";
@@ -102,14 +102,14 @@ export default function ManageBusiness() {
             border: "none",
           }}
         />
-        <CustomeButton
+        <CustomButton
           startIcon={<AddSharpIcon />}
           smoothCorners={15}
           backgroundColor={"#0080FF"}
           width="100%"
         >
           Add Business
-        </CustomeButton>
+        </CustomButton>
       </Popover>
     </Stack>
   );
@@ -117,7 +117,7 @@ export default function ManageBusiness() {
 
 function OrgButton({ isSelected, onClick }) {
   return (
-    <CustomeStack
+    <CustomStack
       onClick={onClick}
       smoothCorners="18"
       width="100%"
@@ -145,6 +145,6 @@ function OrgButton({ isSelected, onClick }) {
           </IconButton>
         </Stack>
       </Stack>
-    </CustomeStack>
+    </CustomStack>
   );
 }

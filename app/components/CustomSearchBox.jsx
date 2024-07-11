@@ -1,5 +1,5 @@
 import { Stack, InputAdornment, TextField } from "@mui/material";
-import CustomeTextField from "./CustomeTextField";
+import CustomTextField from "./CustomTextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useMemo, useEffect } from "react";
 
@@ -20,7 +20,7 @@ export default function CustomSearchBox({ options, setUnitListFiltered }) {
   }, [searchText]);
 
   return (
-    <CustomeTextField
+    <CustomTextField
       size="small"
       autoFocus
       placeholder="Type to search..."

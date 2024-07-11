@@ -4,8 +4,8 @@ import {
   DashPaperHead,
   DashPaperBody,
 } from "../../components/DashPaper";
-import CustomeButton from "@/app/components/CustomeButton";
-import CustomeSwitch from "@/app/components/CustomeSwitch";
+import CustomButton from "@/app/components/CustomButton";
+import CustomeSwitch from "@/app/components/CustomSwitch";
 import { Stack, Typography } from "@mui/material";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import CreateProductForm from "./components/CreateProductForm";
@@ -83,7 +83,7 @@ export default function Page() {
               }}
             />
           </Stack>
-          <CustomeButton
+          <CustomButton
             smoothCorners={10}
             fullWidth={true}
             backgroundColor={"#000E33"}
@@ -94,7 +94,7 @@ export default function Page() {
             onClick={onSave}
           >
             Save
-          </CustomeButton>
+          </CustomButton>
         </DashPaperHead>
         <DashPaperBody>
           <CreateProductForm
