@@ -27,19 +27,30 @@ export default function SideNavBar() {
         padding={"20px"}
         // gap={2}
       >
-        <IncrixLogoLight
+        {/* <IncrixLogoLight
           width={"100px"}
           style={{
             margin: "15px",
           }}
-        />
+        /> */}
         <Stack
-        gap={.5}
+          direction={"row"}
+          alignItems={"center"}
+          margin={"15px"}
+          spacing={2}
+        >
+          <Icons.SlipzeLogo width="30px" height="30px" />
+          <Typography color={"white"} fontWeight={600}>
+            Slipze
+          </Typography>
+        </Stack>
+        <Stack
+          gap={0.5}
           sx={{
             height: "100%",
             overflowY: "scroll",
             overflowX: "hidden",
-            paddingBottom:"100px",
+            paddingBottom: "100px",
             "::-webkit-scrollbar": {
               display: "none",
             },
@@ -103,7 +114,7 @@ export default function SideNavBar() {
             ]}
           />
         </Stack>
-        <UserInfoButton  />
+        <UserInfoButton />
       </CustomStack>
     </Stack>
   );

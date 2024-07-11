@@ -1,7 +1,8 @@
+"use client";
 import { Stack, Typography, Button, Chip, Divider } from "@mui/material";
 import Link from "next/link";
 import CustomButton from "./components/CustomButton";
-import SlipzeLogo from "@/public/landing/slipze-logo.svg";
+import Icons from "@/util/icons";
 import DashImg from "@/public/landing/dash-img.png";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import scaleup from "@/public/landing/scaleup.jpg";
@@ -16,10 +17,14 @@ import paymentIcon from "@/public/landing/icons/payment-icon.svg";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import AndroidIcon from "@mui/icons-material/Android";
+import WindowIcon from "@mui/icons-material/Window";
+import AppleIcon from "@mui/icons-material/Apple";
 import svg1 from "@/public/landing/icons/svg1.svg";
 import svg2 from "@/public/landing/icons/svg2.svg";
 import svg3 from "@/public/landing/icons/svg3.svg";
 import IncrixLogoLight from "@/public/images/incrix-logo-light.png";
+import { useState } from "react";
 
 export default function Home() {
   return (
@@ -70,7 +75,8 @@ function Header() {
       >
         <Stack direction={"row"} alignItems={"center"} spacing={10}>
           <Stack direction={"row"} alignItems={"center"} spacing={2}>
-            <img src={SlipzeLogo.src} alt="Slipze Logo" />
+            {/* <img src={SlipzeLogo.src} alt="Slipze Logo" /> */}
+            <Icons.SlipzeLogo width="30px" height="30px" />
             <Typography color={"white"} fontWeight={"600"}>
               Slipze
             </Typography>
@@ -353,6 +359,7 @@ function QuickReview() {
 }
 
 function Pricing() {
+  const [pricingPlan, setPricingPlan] = useState("Yearly");
   const featureList = [
     "Comprehensive Billing System",
     "Inventory Management",
@@ -400,6 +407,55 @@ function Pricing() {
           }}
         >
           <Stack textAlign={"start"} gap={2}>
+            <Stack
+              direction={"row"}
+              position={"relative"}
+              width={"200px"}
+              height={"50px"}
+              borderRadius={"25px"}
+              padding={"5px"}
+              sx={{ backgroundColor: "#000E33" }}
+            >
+              <Stack
+                position={"absolute"}
+                // left={pricingPlan === "Monthly" ? "5px" : "auto"}
+                // right={pricingPlan === "Yearly" ? "5px" : "auto"}
+                width={"100px"}
+                height={"40px"}
+                borderRadius={"25px"}
+                sx={{
+                  backgroundColor: "white",
+                  transform: `translateX(${
+                    pricingPlan === "Monthly" ? 0 : "90px"
+                  })`,
+                  transition: "all 0.5s ease ",
+                }}
+              ></Stack>
+              <Button
+                disableRipple
+                fullWidth
+                variant="text"
+                sx={{
+                  color: pricingPlan === "Monthly" ? "#000E33" : "#ffffff",
+                  textTransform: "none",
+                }}
+                onClick={() => setPricingPlan("Monthly")}
+              >
+                Monthly
+              </Button>
+              <Button
+                disableRipple
+                fullWidth
+                variant="text"
+                sx={{
+                  color: pricingPlan === "Yearly" ? "#000E33" : "#ffffff",
+                  textTransform: "none",
+                }}
+                onClick={() => setPricingPlan("Yearly")}
+              >
+                Annual
+              </Button>
+            </Stack>
             <Chip
               icon={
                 <LocalOfferIcon
@@ -437,7 +493,7 @@ function Pricing() {
                 fontSize={"40px"}
                 color={"#000E33"}
               >
-                ₹999/-
+                {pricingPlan === "Yearly" ? "₹999/-" : "₹99/-"}
               </Typography>
               <Typography
                 variant="h2"
@@ -447,10 +503,13 @@ function Pricing() {
                   textDecoration: "line-through",
                 }}
               >
-                ₹4999/-
+                {pricingPlan === "Yearly" ? "₹4999/-" : "₹499/-"}
               </Typography>
             </Stack>
-
+            <Typography variant="paragraph" color={"#0080FF"}>
+              Save upto{" "}
+              {pricingPlan === "Yearly" ? "₹4000/- annually" : "₹400/- monthly"}
+            </Typography>
             <CustomButton
               smoothCorners="50"
               backgroundColor="#000E33"
@@ -604,7 +663,8 @@ function Footer() {
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Stack gap={2}>
             <Stack direction={"row"} alignItems={"center"} spacing={2}>
-              <img src={SlipzeLogo.src} alt="Slipze Logo" />
+              {/* <img src={SlipzeLogo.src} alt="Slipze Logo" /> */}
+              <Icons.SlipzeLogo width="30px" height="30px" />
               <Typography color={"white"} fontWeight={"600"}>
                 Slipze
               </Typography>
@@ -614,6 +674,11 @@ function Footer() {
               eCommerce with real-time analytics and automated workflows.
               Platform-independent, it adapts seamlessly to your business needs.
             </Typography>
+            <Stack direction={"row"} alignItems={"center"} spacing={2}>
+              <AndroidIcon sx={{ fill: "white" }} />
+              <WindowIcon sx={{ fill: "white" }} />
+              <AppleIcon sx={{ fill: "white" }} />
+            </Stack>
           </Stack>
           <Stack gap={2}>
             <Typography variant="paragraph" color={"white"}>

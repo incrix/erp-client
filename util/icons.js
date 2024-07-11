@@ -10,8 +10,9 @@ import ecomIcon from "@/public/icons/ecom-icon.svg";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import menuIcon from "@/public/icons/menu-icon.svg";
+import slipzeLogo from "@/public/landing/slipze-logo.svg";
 
-function SvgImage(props){
+function SvgImage(props) {
   const { color, width, height, src, margin } = props;
   return (
     <div
@@ -28,40 +29,44 @@ function SvgImage(props){
   );
 }
 
+function SlipzeLogo(props) {
+  return <SvgImage {...props} src={slipzeLogo.src} />;
+}
+
 function DashIcon(props) {
-  return <SvgImage {...props} src={dashIcon.src} />
+  return <SvgImage {...props} src={dashIcon.src} />;
 }
 
 function ProductIcon(props) {
-  return <SvgImage {...props} src={productIcon.src} />
+  return <SvgImage {...props} src={productIcon.src} />;
 }
 
 function InvoiceIcon(props) {
-  return <SvgImage {...props} src={invoiceIcon.src} />
+  return <SvgImage {...props} src={invoiceIcon.src} />;
 }
 
 function CustomerIcon(props) {
-  return <SvgImage {...props} src={customerIcon.src} />
+  return <SvgImage {...props} src={customerIcon.src} />;
 }
 
 function VendorIcon(props) {
-  return <SvgImage {...props} src={vendorIcon.src} />
+  return <SvgImage {...props} src={vendorIcon.src} />;
 }
 
 function PurchaseIcon(props) {
-  return <SvgImage {...props} src={purchaseIcon.src} />
+  return <SvgImage {...props} src={purchaseIcon.src} />;
 }
 
 function PaymentIcon(props) {
-  return <SvgImage {...props} src={paymentIcon.src} />
+  return <SvgImage {...props} src={paymentIcon.src} />;
 }
 
 function ReportIcon(props) {
-  return <SvgImage {...props} src={reportIcon.src} />
+  return <SvgImage {...props} src={reportIcon.src} />;
 }
 
 function EcomIcon(props) {
-  return <SvgImage {...props} src={ecomIcon.src} />
+  return <SvgImage {...props} src={ecomIcon.src} />;
 }
 
 function SettingsIcon(props) {
@@ -73,7 +78,7 @@ function LogoutIcon(props) {
 }
 
 function MenuIcon(props) {
-  return <SvgImage {...props} src={menuIcon.src} />
+  return <SvgImage {...props} src={menuIcon.src} />;
 }
 
 const Icons = {
@@ -89,6 +94,7 @@ const Icons = {
   SettingsIcon,
   LogoutIcon,
   MenuIcon,
+  SlipzeLogo
 };
 
 export default Icons;
