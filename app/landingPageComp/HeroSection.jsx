@@ -74,7 +74,7 @@ export default function HeroSection() {
             width="300px"
             height="50px"
           >
-            Start free 30-day trial
+            Start free 90-day trial
           </CustomButton>
           <Typography variant="paragraph" color={"rgba(255, 255, 255, 0.6)"}>
             No credit card required.

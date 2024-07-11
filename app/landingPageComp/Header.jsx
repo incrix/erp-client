@@ -1,8 +1,11 @@
+"use client";
 import { Stack, Typography, Button } from "@mui/material";
 import CustomButton from "../components/CustomButton";
 import Icons from "@/util/icons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 export default function Header() {
+  const router = useRouter();
   return (
     <header style={{ display: "flex", justifyContent: "center" }}>
       <Stack
@@ -55,10 +58,15 @@ export default function Header() {
               color: "white",
               textTransform: "none",
             }}
+            onClick={() => router.push("/signin")}
           >
             Log in
           </Button>
-          <CustomButton smoothCorners="10" backgroundColor="#0080FF">
+          <CustomButton
+            smoothCorners="10"
+            backgroundColor="#0080FF"
+            onClick={() => router.push("/signin")}
+          >
             Start free trial
           </CustomButton>
         </Stack>
