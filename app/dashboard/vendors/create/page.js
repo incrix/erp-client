@@ -7,20 +7,19 @@ import {
 import CustomButton from "@/app/components/CustomButton";
 import { Stack, Typography } from "@mui/material";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
-import CreateCustomerForm from "./components/CreateCustomerForm";
+import CreateVendorForm from "./components/CreateVendorForm";
 import { useState, useEffect } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import { useDispatch } from "react-redux";
 import { setAlert } from "@/redux/features/alertSlice";
 import { useRouter } from "next/navigation";
-import { emptyCustomerList } from "@/redux/features/customerList";
+import { emptyVendorList } from "@/redux/features/vendorList";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
   const router = useRouter();
   const dispatch = useDispatch();
-  const [newCustomer, setNewCustomer] = useState({
-    type: "Business",
+  const [newVendor, setNewVendor] = useState({
     name: "",
     email: "",
     phone: "",
@@ -35,31 +34,30 @@ export default function Page() {
       city: "",
       state: "",
     },
-    shippingAddress: [],
     balance: {
       type: "Credit",
       value: 0,
     },
   });
 
-  const onChangeCustomerValue = (param, value) => {
-    setNewCustomer((prevState) => ({
+  const onChangeVendorValue = (param, value) => {
+    setNewVendor((prevState) => ({
       ...prevState,
       [param]: value,
     }));
   };
 
   useEffect(() => {
-    console.log(newCustomer);
-  }, [newCustomer]);
+    console.log(newVendor);
+  }, [newVendor]);
 
   const onSave = () => {
-    fetch(`/api/customer/create-customer`, {
+    fetch(`/api/vendor/create-vendor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newCustomer),
+      body: JSON.stringify(newVendor),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -73,8 +71,8 @@ export default function Page() {
           })
         );
         if (data.status == "success") {
-          dispatch(emptyCustomerList());
-          router.push("/dashboard/customers");
+          dispatch(emptyVendorList());
+          router.push("/dashboard/vendors");
         }
       });
   };
@@ -82,7 +80,7 @@ export default function Page() {
   return (
     <Stack height={"100%"}>
       <DashPaperLayout>
-        <DashPaperHead title={"Create new customer"}>
+        <DashPaperHead title={"Create new vendor"}>
           <CustomButton
             smoothCorners={10}
             fullWidth={true}
@@ -93,7 +91,7 @@ export default function Page() {
             startIcon={<SaveRoundedIcon />}
             onClick={onSave}
           >
-            Save customer
+            Save vendor
           </CustomButton>
         </DashPaperHead>
         <DashPaperBody
@@ -117,9 +115,9 @@ export default function Page() {
             },
           }}
         >
-          <CreateCustomerForm
-            onChangeCustomerValue={onChangeCustomerValue}
-            newCustomer={newCustomer}
+          <CreateVendorForm
+            onChangeVendorValue={onChangeVendorValue}
+            newVendor={newVendor}
           />
         </DashPaperBody>
       </DashPaperLayout>

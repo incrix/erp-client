@@ -1,7 +1,7 @@
 "use client";
-import { Stack, InputAdornment } from "@mui/material";
+import { Stack, InputAdornment, LinearProgress } from "@mui/material";
 import TableComponent from "../components/TableComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import ActionButton from "./components/ActionButton";
 // import PaymentStatus from "./components/PaymentStatus";
@@ -17,13 +17,39 @@ import {
   DashPaperPagination,
 } from "../components/DashPaper";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateVendorList } from "@/redux/features/vendorList";
 // import PriceAction from "./components/PriceAction";
 
 export default function Page() {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const rowPerPage = 10;
+  const vendorList = useSelector((state) => state.vendorList);
+  const [isLoading, setIsLoading] = useState(true);
+
+  //http://localhost:3333/api/vendor/get-all-vendor
+  const updateList = async () => {
+    await fetch("/api/vendor/get-all-vendor")
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        dispatch(
+          updateVendorList({
+            data: data.data,
+          })
+        );
+      });
+  };
+
+  useEffect(() => {
+    vendorList.length == 0 && isLoading && updateList();
+    if (vendorList.length > 0) setIsLoading(false);
+  });
+
   const headList = [
     { title: "Name", key: "name", type: "string" },
     { title: "Contact Info", key: "customer", type: "string" },
@@ -169,20 +195,24 @@ export default function Page() {
           </CustomButton>
         </DashPaperHead>
         <DashPaperBody>
-          <TableComponent
-            headList={headList}
-            rows={rows}
-            currentPage={currentPage}
-            rowPerPage={rowPerPage}
-            height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
-          />
+          {isLoading ? (
+            <LinearProgress />
+          ) : (
+            <TableComponent
+              headList={headList}
+              rows={vendorList}
+              currentPage={currentPage}
+              rowPerPage={rowPerPage}
+              height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
+            />
+          )}
         </DashPaperBody>
         <DashPaperFooter>
           <DashPaperPagination
             currentPage={currentPage}
             rowPerPage={rowPerPage}
             setCurrentPage={setCurrentPage}
-            rowLength={rows.length}
+            rowLength={vendorList.length}
           />
         </DashPaperFooter>
       </DashPaperLayout>

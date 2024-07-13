@@ -1,7 +1,7 @@
 "use client";
-import { Stack, InputAdornment } from "@mui/material";
+import { Stack, InputAdornment, LinearProgress } from "@mui/material";
 import TableComponent from "../components/TableComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import ActionButton from "./components/ActionButton";
 // import PaymentStatus from "./components/PaymentStatus";
@@ -17,17 +17,44 @@ import {
   DashPaperPagination,
 } from "../components/DashPaper";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateCustomerList } from "@/redux/features/customerList";
 // import PriceAction from "./components/PriceAction";
 
 export default function Page() {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const rowPerPage = 10;
+  const customerList = useSelector((state) => state.customerList);
+  const [isLoading, setIsLoading] = useState(true);
+
+  //http://localhost:3333/api/customer/get-all-cus
+  const updateList = async () => {
+    await fetch("/api/customer/get-all-cus")
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        dispatch(
+          updateCustomerList({
+            data: data,
+          })
+        );
+      });
+  };
+
+  useEffect(() => {
+    console.log(customerList);
+    customerList.length == 0 && isLoading && updateList();
+    if (customerList.length > 0) setIsLoading(false);
+  });
+
   const headList = [
     { title: "Name", key: "name", type: "string" },
-    { title: "Contact Info", key: "customer", type: "string" },
-    { title: "Type", key: "date", type: "string" },
+    { title: "Contact Info", key: "email", type: "string" },
+    { title: "Type", key: "type", type: "string" },
     { title: "Closing balance", key: "amount", type: "string" },
     {
       title: "Actions",
@@ -36,104 +63,7 @@ export default function Page() {
       actionComp: ActionButton,
     },
   ];
-  const rows = [
-    {
-      id: "01",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-    {
-      id: "02",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-    },
-    {
-      id: "03",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-    {
-      id: "04",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "partiallypaid",
-    },
-    {
-      id: "05",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-    },
-    {
-      id: "06",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "partiallypaid",
-    },
-    {
-      id: "07",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-    {
-      id: "08",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-    },
-    {
-      id: "09",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-    {
-      id: "10",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-    {
-      id: "11",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-    },
-    {
-      id: "12",
-      invoiceNo: "#INV0001",
-      name: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-    },
-  ];
+
   return (
     <Stack height={"100%"}>
       <DashPaperLayout>
@@ -169,20 +99,25 @@ export default function Page() {
           </CustomButton>
         </DashPaperHead>
         <DashPaperBody>
-          <TableComponent
-            headList={headList}
-            rows={rows}
-            currentPage={currentPage}
-            rowPerPage={rowPerPage}
-            height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
-          />
+          {isLoading ? (
+            <LinearProgress />
+          ) : (
+            <TableComponent
+              title={"Customer"}
+              headList={headList}
+              rows={customerList}
+              currentPage={currentPage}
+              rowPerPage={rowPerPage}
+              height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
+            />
+          )}
         </DashPaperBody>
         <DashPaperFooter>
           <DashPaperPagination
             currentPage={currentPage}
             rowPerPage={rowPerPage}
             setCurrentPage={setCurrentPage}
-            rowLength={rows.length}
+            rowLength={customerList.length}
           />
         </DashPaperFooter>
       </DashPaperLayout>

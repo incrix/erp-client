@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/dashboard",
     "start_url": "/dashboard",
-    "name": "Incrix ERP",
-    "short_name": "Incrix ERP",
+    "name": "Slipze",
+    "short_name": "Slipze",
     "description": "Streamline Your Business, Simplify Success: ERP Made Easy",
     "icons": [
         {

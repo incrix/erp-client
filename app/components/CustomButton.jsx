@@ -14,7 +14,7 @@ export default function CustomButton(props) {
           borderRadius: props.borderRadius || "10px",
           fontSize: "16px",
           border: props.border || "none",
-          borderColor: props.borderColor || "transparent",
+          // borderColor: props.borderColor || "transparent",
           backgroundColor: props.backgroundColor,
           fontWeight: props.fontWeight ? props.fontWeight : "400",
           height: props.height,

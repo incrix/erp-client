@@ -110,6 +110,7 @@ export function DashPaperPagination({
       </Typography>
       <IconButton
         size="small"
+        disabled={rowLength === 0 || currentPage === 1}
         sx={{
           borderRadius: "10px",
           color: "white",
@@ -133,6 +134,7 @@ export function DashPaperPagination({
       </Typography>
       <IconButton
         size="small"
+        disabled={rowLength === 0 || currentPage === totalPage}
         sx={{
           borderRadius: "10px",
           color: "white",

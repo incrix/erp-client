@@ -4,16 +4,10 @@ import {
   Typography,
   MenuItem,
   ListSubheader,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  TextField,
-  DialogActions,
-  Button,
+  IconButton,
 } from "@mui/material";
 import CustomTextField from "@/app/components/CustomTextField";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CustomSelect from "@/app/components/CustomSelect";
 import CustomDuoButtonGroup from "@/app/components/CustomDuoButtonGroup";
 import CustomSearchBox from "@/app/components/CustomSearchBox";
@@ -24,6 +18,10 @@ import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import ScaleRoundedIcon from "@mui/icons-material/ScaleRounded";
 import Icons from "@/util/icons";
+import CustomDialogBox from "@/app/components/CustomDialogBox";
+import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
+import CustomStack from "@/app/components/CustomStack";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function CreateProductForm({
   newProduct,
@@ -38,6 +36,7 @@ export default function CreateProductForm({
   const handleClose = () => {
     setOpen(false);
   };
+
   const renderUnitMenuItem = (option) => {
     return (
       <MenuItem
@@ -64,9 +63,86 @@ export default function CreateProductForm({
       </MenuItem>
     );
   };
+
   return (
     <Stack gap={2}>
-      <AddCatDilogForm open={open} handleClose={handleClose} />
+      <CustomDialogBox
+        open={open}
+        onClose={handleClose}
+        title={
+          <Stack direction={"row"} justifyContent={"space-between"}>
+            <h3>Create new category</h3>
+            <IconButton
+              onClick={handleClose}
+              sx={{ "&:hover": { color: "#FF2E2E" } }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Stack>
+        }
+        actions={
+          <CustomButton smoothCorners={15} backgroundColor={"#0080FF"}>
+            Add
+          </CustomButton>
+        }
+      >
+        <Stack gap={2}>
+          {/* <Stack>
+            <label
+              for="upload-photo"
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              <CustomStack
+                alignItems={"center"}
+                justifyContent={"center"}
+                smoothCorners={"12"}
+                borderRadius={"10px"}
+                width="120px"
+                height="100px"
+                border={"2px solid #82878C"}
+              >
+                <AddPhotoAlternateRoundedIcon
+                  sx={{
+                    color: "#82878C",
+                    fontSize: "40px",
+                  }}
+                />
+              </CustomStack>
+            </label>
+            <input
+              type="file"
+              id="upload-photo"
+              style={{
+                display: "none",
+              }}
+            />
+          </Stack> */}
+          <CustomTextField
+            fullWidth
+            height={"40px"}
+            smoothCorners={25}
+            placeholder={"Eg: Dairy Products"}
+            borderWidth="1px"
+            // onChange={(e) => {
+            //   onChangeProductValue("sku", e.target.value);
+            // }}
+          />
+          <CustomTextField
+            fullWidth
+            multiline
+            smoothCorners={25}
+            // sx={{minHeight:"80px"}}
+            placeholder={"Description"}
+            borderWidth="1px"
+            // onChange={(e) => {
+            //   onChangeProductValue("sku", e.target.value);
+            // }}
+          />
+        </Stack>
+      </CustomDialogBox>
+      {/* <AddCatDialogForm open={open} handleClose={handleClose} /> */}
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
         Basic Details
       </Typography>
@@ -280,7 +356,6 @@ export default function CreateProductForm({
           listSubheader={
             <ListSubheader
               sx={{
-                // backgroundColor: "#F8F8F8",
                 margin: "10px 0",
               }}
             >
@@ -295,7 +370,7 @@ export default function CreateProductForm({
                   backgroundColor="#97A1B1"
                   onClick={handleClickOpen}
                 >
-                  Add Catagory
+                  Add Category
                 </CustomButton>
               </Stack>
             </ListSubheader>
@@ -349,49 +424,6 @@ export default function CreateProductForm({
         />
       </Stack>
     </Stack>
-  );
-}
-
-function AddCatDilogForm({ open, handleClose }) {
-  return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      PaperProps={{
-        component: "form",
-        onSubmit: (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries(formData.entries());
-          const email = formJson.email;
-          console.log(email);
-          handleClose();
-        },
-      }}
-    >
-      <DialogTitle>Subscribe</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          id="name"
-          name="email"
-          label="Email Address"
-          type="email"
-          fullWidth
-          variant="standard"
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit">Subscribe</Button>
-      </DialogActions>
-    </Dialog>
   );
 }
 

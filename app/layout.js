@@ -1,7 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Stack } from "@mui/material";
-import bgSvg from "@/public/landing/bg.svg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,12 +8,15 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: "Incrix ERP",
+  title: "Slipze ERP",
   description: "Streamline Your Business, Simplify Success: ERP Made Easy",
   generator: "Next.js",
   manifest: "/manifest.json",
   keywords: [
     "incrix",
+    "Slipze",
+    "invoice",
+    "invoicing",
     "erp",
     "billing",
     "incrixerp",
@@ -23,7 +24,7 @@ export const metadata = {
     "free erp",
   ],
   authors: [
-    { name: "Incrix Techlutions LLP" },
+    { name: "Incrix Techlutions LLP", url: "https://www.incrix.com" },
     {
       name: "Incrix Techlutions LLP",
       url: "https://www.linkedin.com/company/incrix/",
@@ -31,7 +32,7 @@ export const metadata = {
   ],
   icons: [
     { rel: "apple-touch-icon", url: "icon-192x192.png" },
-    { rel: "icon", url: "icon-192x192.png" },
+    { rel: "icon", url: "favicon.ico" },
   ],
 };
 
