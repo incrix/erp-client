@@ -50,6 +50,8 @@ export default function TableComponent({
   currentPage,
   rowPerPage,
   title,
+  isRowClickable = false,
+  onRowClick = () => {},
 }) {
   const rowsPerPage = rows.slice(
     (currentPage - 1) * rowPerPage,
@@ -101,8 +103,13 @@ export default function TableComponent({
             return (
               <StyledTableRow
                 key={row.id}
+                onClick={() => onRowClick(row)}
                 sx={{
                   height: "30px !important",
+                  cursor: isRowClickable ? "pointer" : "default",
+                  "&:hover": {
+                    backgroundColor: isRowClickable ? "#F8F8F8" : "transparent",
+                  },
                 }}
               >
                 {headList.map((item, index) => {

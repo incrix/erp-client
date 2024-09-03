@@ -20,7 +20,6 @@ export default function CustomSelect({
       displayEmpty
       value={value}
       renderValue={(selected) => {
-        console.log(typeof selected);
         if (selected != undefined && selected.length === 0) {
           return (
             <Typography

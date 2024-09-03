@@ -1,7 +1,14 @@
 "use client";
-import { Stack, InputAdornment, Typography } from "@mui/material";
+import {
+  Stack,
+  InputAdornment,
+  Typography,
+  Menu,
+  MenuItem,
+  LinearProgress,
+} from "@mui/material";
 import TableComponent from "../components/TableComponent";
-import { useState } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
 import ActionButton from "./components/ActionButton";
 import PaymentStatus from "./components/PaymentStatus";
@@ -9,6 +16,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CustomButton from "@/app/components/CustomButton";
 import CustomTextField from "@/app/components/CustomTextField";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import {
   DashPaperLayout,
   DashPaperHead,
@@ -18,26 +27,99 @@ import {
 } from "../components/DashPaper";
 import PriceAction from "./components/PriceAction";
 import { useRouter } from "next/navigation";
+import getInvoiceList from "@/util/invoiceListUtil";
+import SegmentedControl from "../components/SegmentedControl";
+// import PrintoutComp from "../components/PrintoutComp";
 
 export default function Page() {
   const { height, width } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [invoiceList, setInvoiceList] = useState([]);
+  const [filteredInvoiceList, setFilteredInvoiceList] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [filter, setFilter] = useState("all");
+  const [tabState, setTabState] = useState("all");
+  const open = Boolean(anchorEl);
   const router = useRouter();
   const rowPerPage = 10;
+
+  const updateInvoiceList = async () => {
+    setIsLoading(true);
+    const list = await getInvoiceList(true);
+    setInvoiceList([...list].reverse());
+    setIsLoading(false);
+  };
+
+  const handleFilterMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  useEffect(() => {
+    invoiceList.length === 0 && updateInvoiceList();
+  }, []);
+
+  const onFilterAll = () => {
+    setFilter("all");
+    const list = invoiceList.filter((invoice) => {
+      return invoice.status !== "cancelled";
+    });
+    setFilteredInvoiceList(list);
+  };
+
+  const onFilterPending = () => {
+    setFilter("pending");
+    const list = invoiceList.filter((invoice) => {
+      return invoice.status === "pending";
+    });
+    setFilteredInvoiceList(list);
+  };
+
+  const onFilterPaid = () => {
+    setFilter("paid");
+    const list = invoiceList.filter((invoice) => {
+      return invoice.status === "paid";
+    });
+    setFilteredInvoiceList(list);
+  };
+
+  const onFilterPartiallyPaid = () => {
+    setFilter("partially");
+    const list = invoiceList.filter((invoice) => {
+      return invoice.status === "partially";
+    });
+    setFilteredInvoiceList(list);
+  };
+
+  const onFilterCancelled = () => {
+    const list = invoiceList.filter((invoice) => {
+      return invoice.status === "cancelled";
+    });
+    setFilteredInvoiceList(list);
+  };
+
+  useEffect(() => {
+    filter === "all" && onFilterAll();
+    filter === "pending" && onFilterPending();
+    filter === "paid" && onFilterPaid();
+    filter === "partially" && onFilterPartiallyPaid();
+  }, [invoiceList]);
+
   const CustomerComp = ({ id, row }) => {
     return (
       <Stack>
         <Typography variant="body1" fontSize={"16px"}>
-          {row.customer}
+          {row.customerDetails.customerName}
         </Typography>
         <Typography variant="body2" fontSize={"12px"}>
-          {row.phone}
+          {row.customerDetails.phone}
         </Typography>
       </Stack>
     );
   };
+
   const headList = [
-    { title: "Invoice", key: "invoiceNo", type: "string" },
+    { title: "Invoice", key: "id", type: "string" },
     {
       title: "Customer",
       key: "customer",
@@ -45,7 +127,12 @@ export default function Page() {
       actionComp: CustomerComp,
     },
     { title: "Date", key: "date", type: "string" },
-    { title: "Amount", key: "amount", type: "action", actionComp: PriceAction },
+    {
+      title: "Amount",
+      key: "totalPrice",
+      type: "action",
+      actionComp: PriceAction,
+    },
     {
       title: "Status",
       key: "status",
@@ -59,116 +146,7 @@ export default function Page() {
       actionComp: ActionButton,
     },
   ];
-  const rows = [
-    {
-      id: "01",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-      phone: "+919876543210",
-    },
-    {
-      id: "02",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-      phone: "+919876543210",
-    },
-    {
-      id: "03",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-      phone: "+919876543210",
-    },
-    {
-      id: "04",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "partiallypaid",
-      phone: "+919876543210",
-    },
-    {
-      id: "05",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-      phone: "+919876543210",
-    },
-    {
-      id: "06",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "partiallypaid",
-      phone: "+919876543210",
-    },
-    {
-      id: "07",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-      phone: "+919876543210",
-    },
-    {
-      id: "08",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-      phone: "+919876543210",
-    },
-    {
-      id: "09",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-      phone: "+919876543210",
-    },
-    {
-      id: "10",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "pending",
-      phone: "+919876543210",
-    },
-    {
-      id: "11",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "paid",
-      phone: "+919876543210",
-    },
-    {
-      id: "12",
-      invoiceNo: "#INV0001",
-      customer: "Avinash",
-      date: "02-02-2024",
-      amount: 1020,
-      status: "partiallypaid",
-      phone: "+919876543210",
-    },
-  ];
+
   return (
     <Stack height={"100%"}>
       <DashPaperLayout>
@@ -203,21 +181,136 @@ export default function Page() {
             Add Invoice
           </CustomButton>
         </DashPaperHead>
-        <DashPaperBody>
-          <TableComponent
-            headList={headList}
-            rows={rows}
-            currentPage={currentPage}
-            rowPerPage={rowPerPage}
-            height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
-          />
+        <DashPaperBody
+          sx={{
+            gap: 1.5,
+          }}
+        >
+          <Stack direction={"row"} gap={2}>
+            <SegmentedControl
+              name="invoice"
+              controlRef={useRef()}
+              segments={[
+                { value: "all", label: "All Invoice", ref: useRef() },
+                { value: "cancelled", label: "Cancelled", ref: useRef() },
+              ]}
+              callback={(value, index) => {
+                setTabState(value);
+                setFilter("all");
+                value === "cancelled" ? onFilterCancelled() : onFilterAll();
+              }}
+            />
+            {tabState === "all" && (
+              <Stack>
+                <CustomButton
+                  onClick={handleFilterMenuClick}
+                  endIcon={<KeyboardArrowDownIcon />}
+                  startIcon={<FilterAltIcon />}
+                  backgroundColor={"#F8F8F8"}
+                  textColor={"#97A1B1"}
+                  fontSize={"12px"}
+                  fontWeight={"600"}
+                  smoothCorners={10}
+                  height={"40px"}
+                >
+                  Filter
+                </CustomButton>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={() => {
+                    setAnchorEl(null);
+                  }}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                    sx: {
+                      padding: "5px",
+                      "& .MuiMenuItem-root": {
+                        padding: "5px 10px",
+                        fontSize: "14px",
+                        borderRadius: "5px",
+                        color: "#97A1B1",
+                        "&:hover": {
+                          backgroundColor: "#F8F8F8",
+                        },
+                      },
+                      "& .Mui-selected": {
+                        backgroundColor: "#F2F8FF",
+                      },
+                    },
+                  }}
+                  slotProps={{
+                    paper: {
+                      sx: {
+                        borderRadius: "10px",
+                      },
+                      elevation: 1,
+                    },
+                  }}
+                >
+                  <MenuItem
+                    selected={filter === "all"}
+                    onClick={() => {
+                      onFilterAll();
+                      setAnchorEl(null);
+                    }}
+                  >
+                    All
+                  </MenuItem>
+                  <MenuItem
+                    selected={filter === "paid"}
+                    onClick={() => {
+                      onFilterPaid();
+                      setAnchorEl(null);
+                    }}
+                  >
+                    Paid
+                  </MenuItem>
+                  <MenuItem
+                    selected={filter === "partiallypaid"}
+                    onClick={() => {
+                      onFilterPartiallyPaid();
+                      setAnchorEl(null);
+                    }}
+                  >
+                    Partially Paid
+                  </MenuItem>
+                  <MenuItem
+                    selected={filter === "pending"}
+                    onClick={() => {
+                      onFilterPending();
+                      setAnchorEl(null);
+                    }}
+                  >
+                    Pending
+                  </MenuItem>
+                </Menu>
+              </Stack>
+            )}
+          </Stack>
+          {isLoading ? (
+            <LinearProgress />
+          ) : (
+            <TableComponent
+              headList={headList}
+              rows={filteredInvoiceList}
+              currentPage={currentPage}
+              rowPerPage={rowPerPage}
+              height={height > 800 ? `${height * 0.6}px` : `${height * 0.55}px`}
+              // isRowClickable={true}
+              // onRowClick={(row) => {
+              //   router.push(`/dashboard/invoice?id=${row._id}`);
+              // }}
+            />
+          )}
         </DashPaperBody>
         <DashPaperFooter>
           <DashPaperPagination
             currentPage={currentPage}
             rowPerPage={rowPerPage}
             setCurrentPage={setCurrentPage}
-            rowLength={rows.length}
+            rowLength={filteredInvoiceList.length}
           />
         </DashPaperFooter>
       </DashPaperLayout>

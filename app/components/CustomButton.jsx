@@ -12,7 +12,7 @@ export default function CustomButton(props) {
         {...props}
         sx={{
           borderRadius: props.borderRadius || "10px",
-          fontSize: "16px",
+          fontSize: props.fontSize || "16px",
           border: props.border || "none",
           // borderColor: props.borderColor || "transparent",
           backgroundColor: props.backgroundColor,
@@ -25,10 +25,12 @@ export default function CustomButton(props) {
           maskImage: "paint(smooth - corners)",
           "-webkit-mask-image": "paint(smooth-corners)",
           textTransform: "none",
-          "&:hover": {
-            backgroundColor: props.backgroundColor,
-            border: props.border || "none",
-          },
+          "&:hover": props.hover
+            ? props.hover
+            : {
+                backgroundColor: props.backgroundColor,
+                border: props.border || "none",
+              },
         }}
       >
         {props.children}

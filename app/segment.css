@@ -1,0 +1,72 @@
+.controls-container{
+    position: relative;
+}
+
+.controls {
+  display: inline-flex;
+  background: #F8F8F8;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+  position: relative;
+  height: 40px;
+  --smooth-corners: 5,
+  maskImage: paint(smooth - corners),
+  -webkit-mask-image: "paint(smooth-corners)"
+}
+
+.controls input {
+  opacity: 0;
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+}
+
+.segment {
+  min-width: 120px;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.segment label {
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  font-size: 12px;
+  height: 100%;
+  transition: color 0.5s ease;
+  color: #97A1B1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .segment.active label {
+  color: #97A1B1;
+} */
+
+.controls::before {
+  content: "";
+  background: white;
+  border: 1px solid #97A1B1;
+  border-radius: 8px;
+  width: var(--highlight-width);
+  transform: translateX(var(--highlight-x-pos));
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  z-index: 0;
+}
+
+/* Only allow transitions once component is ready */
+.controls.ready::before {
+  transition: transform 0.3s ease, width 0.3s ease;
+}

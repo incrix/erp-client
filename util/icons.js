@@ -11,6 +11,12 @@ import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import menuIcon from "@/public/icons/menu-icon.svg";
 import slipzeLogo from "@/public/landing/slipze-logo.svg";
+import card from "@/public/icons/card.svg";
+import cash from "@/public/icons/cash.svg";
+import credit from "@/public/icons/credit.svg";
+import qr from "@/public/icons/qr.svg";
+import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import AccountBalanceRoundedIcon from "@mui/icons-material/AccountBalanceRounded";
 
 function SvgImage(props) {
   const { color, width, height, src, margin } = props;
@@ -81,6 +87,29 @@ function MenuIcon(props) {
   return <SvgImage {...props} src={menuIcon.src} />;
 }
 
+function CardIcon(props){
+  return <SvgImage {...props} src={card.src} />;
+}
+
+function CashIcon(props){
+  return <SvgImage {...props} src={cash.src} />;
+}
+
+function EMIIcon(props){
+  return <SvgImage {...props} src={credit.src} />;
+}
+
+function QrIcon(props){
+  return <SvgImage {...props} src={qr.src} />;
+}
+
+function NetBankingIcon(props) {
+  return <LanguageRoundedIcon {...props} />;
+}
+function ChequeIcon(props) {
+  return <AccountBalanceRoundedIcon {...props} />;
+}
+
 const Icons = {
   DashIcon,
   ProductIcon,
@@ -94,7 +123,14 @@ const Icons = {
   SettingsIcon,
   LogoutIcon,
   MenuIcon,
-  SlipzeLogo
+  SlipzeLogo,
+  CardIcon,
+  CashIcon,
+  EMIIcon,
+  QrIcon,
+  NetBankingIcon,
+  ChequeIcon
+
 };
 
 export default Icons;

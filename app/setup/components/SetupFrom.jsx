@@ -139,7 +139,7 @@ export default function SetupForm() {
     else return true;
   }
   const handleSummitDetails = () =>{
-    fetch('/api/user/create-profile',{
+    fetch('/api/user/create-business',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

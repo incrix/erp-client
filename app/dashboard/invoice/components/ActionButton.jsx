@@ -4,6 +4,9 @@ import { IconButton, Stack, Menu, MenuItem } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import { Delete } from "@mui/icons-material";
+import CustomButton from "@/app/components/CustomButton";
+import LocalPrintshopRoundedIcon from "@mui/icons-material/LocalPrintshopRounded";
+import { setPrintCompState } from "@/util/printCompUtil";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -57,7 +60,30 @@ export default function ActionButton({ id, row }) {
     setAnchorEl(null);
   };
   return (
-    <Stack alignItems={"start"}>
+    <Stack width={"100%"} direction={"row"} alignItems={"center"}>
+      <CustomButton
+        textColor="#0080FF"
+        borderRadius="5px"
+        backgroundColor="#F2F8FF"
+        border="1px solid #F2F8FF"
+        fontSize="12px"
+        startIcon={<LocalPrintshopRoundedIcon />}
+        height="24px"
+        smoothCorners="12"
+        hover={{
+          backgroundColor: "#F2F8FF",
+          border: "1px solid #0080FF",
+        }}
+        onClick={() => {
+          setPrintCompState({
+            isOpen: true,
+            title: "Preview Invoice",
+            invoice: row,
+          });
+        }}
+      >
+        Print
+      </CustomButton>
       <IconButton
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
@@ -65,7 +91,7 @@ export default function ActionButton({ id, row }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Icons.MenuIcon color={"#82878C"} />
+        <Icons.MenuIcon width="22px" height="22px" color={"#0080FF"} />
       </IconButton>
       <StyledMenu
         id="demo-customized-menu"

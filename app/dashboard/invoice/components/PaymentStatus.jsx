@@ -2,6 +2,7 @@ import { Stack, Chip, Popper, Fade, Paper, Typography } from "@mui/material";
 import AccessTimeFilledRoundedIcon from "@mui/icons-material/AccessTimeFilledRounded";
 import DonutLargeRoundedIcon from "@mui/icons-material/DonutLargeRounded";
 import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 
 export default function PaymentStatus({ id, row }) {
@@ -46,7 +47,10 @@ export default function PaymentStatus({ id, row }) {
                 {row.status === "paid" ? "Paid Amount" : "Pending Amount"}
               </Typography>
               <Typography fontWeight={600} fontSize={18}>
-                ₹{row.amount}
+                ₹
+                {row.totalPrice - row.paidAmount === 0
+                  ? row.paidAmount.toFixed(2)
+                  : (row.totalPrice - row.paidAmount).toFixed(2)}
               </Typography>
             </Paper>
           </Fade>
@@ -76,7 +80,7 @@ export default function PaymentStatus({ id, row }) {
           backgroundColor={"#ECFBEA"}
         />
       )}
-      {row.status === "partiallypaid" && (
+      {row.status === "partially" && (
         <PaymentStatusChip
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -85,6 +89,19 @@ export default function PaymentStatus({ id, row }) {
           icon={<DonutLargeRoundedIcon color={"#F3801C"} fontSize="small" />}
           color={"#F3801C"}
           backgroundColor={"#FFF6E0"}
+        />
+      )}
+      {row.status === "cancelled" && (
+        <PaymentStatusChip
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          id={id}
+          label={"Cancelled"}
+          icon={
+            <CancelIcon color={"#F46F6F"} fontSize="small" />
+          }
+          color={"#F46F6F"}
+          backgroundColor={"#FAF0F0"}
         />
       )}
     </Stack>

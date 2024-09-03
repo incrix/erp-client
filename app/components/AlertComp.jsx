@@ -24,7 +24,7 @@ export default function AlertComp() {
   });
 
   return (
-    <Stack position={"absolute"} top={100} right={20} zIndex={10000}>
+    <Stack position={"absolute"} top={100} maxWidth={350} right={20} zIndex={10000}>
       <SmoothCorners style={{ display: "none" }} />
       <Collapse in={alert.open}>
         <Alert

@@ -1,5 +1,10 @@
 "use client";
-import { Stack, InputAdornment, LinearProgress } from "@mui/material";
+import {
+  Stack,
+  InputAdornment,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import TableComponent from "../components/TableComponent";
 import { useState, useEffect } from "react";
 import useWindowDimensions from "@/util/useWindowDimensions";
@@ -39,7 +44,7 @@ export default function Page() {
         setIsLoading(false);
         dispatch(
           updateCustomerList({
-            data: data,
+            data: data.data,
           })
         );
       });
@@ -51,11 +56,26 @@ export default function Page() {
     if (customerList.length > 0) setIsLoading(false);
   });
 
+  const ClosingBalance = ({ id, row }) => {
+    return (
+      <Stack>
+        <Typography variant="body1" fontSize={"16px"}>
+          {row.balance.currentBalance}
+        </Typography>
+      </Stack>
+    );
+  };
+
   const headList = [
     { title: "Name", key: "name", type: "string" },
     { title: "Contact Info", key: "email", type: "string" },
     { title: "Type", key: "type", type: "string" },
-    { title: "Closing balance", key: "amount", type: "string" },
+    {
+      title: "Closing balance",
+      key: "balance",
+      type: "action",
+      actionComp: ClosingBalance,
+    },
     {
       title: "Actions",
       key: "actions",

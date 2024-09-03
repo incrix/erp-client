@@ -37,7 +37,7 @@ export default function Page() {
     },
     shippingAddress: [],
     balance: {
-      type: "Credit",
+      type: "in",
       value: 0,
     },
   });

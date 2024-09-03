@@ -10,7 +10,7 @@ import AddPayment from "./AddPayment";
 import ItemList from "./ItemList";
 import InvoiceSummary from "./InvoiceSummary";
 
-export default function CreateInvoiceBody() {
+export default function CreateInvoiceBody({invoiceData, onChangeInvoiceValue}) {
   const { height, width } = useWindowDimensions();
   return (
     <Stack width={"100%"} height={"100%"}>
@@ -46,14 +46,14 @@ export default function CreateInvoiceBody() {
         }}
       >
         <Grid xl={5}>
-          <SelectCustomer />
-          <SelectProduct />
-          <AdditionalCharges />
-          <AddPayment />
+          <SelectCustomer invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue}/>
+          <SelectProduct invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue}/>
+          <AdditionalCharges invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue}/>
+          <AddPayment invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue}/>
         </Grid>
         <Grid xl={7}>
-          <ItemList />
-          <InvoiceSummary />
+          <ItemList invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue} />
+          <InvoiceSummary invoiceData={invoiceData} onChangeInvoiceValue={onChangeInvoiceValue}/>
           <CustomButton
             smoothCorners={20}
             fullWidth={true}

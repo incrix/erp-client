@@ -39,7 +39,8 @@ export default function Home() {
       <QuickReview />
       <Pricing />
       <ECommerce />
-      <Footer />
+      
+      
     </main>
   );
 }

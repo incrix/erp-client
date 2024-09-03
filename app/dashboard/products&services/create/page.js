@@ -5,7 +5,7 @@ import {
   DashPaperBody,
 } from "../../components/DashPaper";
 import CustomButton from "@/app/components/CustomButton";
-import CustomeSwitch from "@/app/components/CustomSwitch";
+import CustomSwitch from "@/app/components/CustomSwitch";
 import { Stack, Typography } from "@mui/material";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import CreateProductForm from "./components/CreateProductForm";
@@ -21,7 +21,10 @@ export default function Page() {
     type: "Product",
     name: "",
     barcode: "",
-    categoryId: "",
+    category: {
+      name:"",
+      catId: "",
+    },
     unitPrice: 0,
     withinTax: false,
     taxRate: 0,
@@ -76,7 +79,7 @@ export default function Page() {
         <DashPaperHead title={"Create new product"}>
           <Stack direction={"row"} gap={1}>
             <Typography>Not for sale</Typography>
-            <CustomeSwitch
+            <CustomSwitch
               checked={!newProduct.isSales}
               onChange={(e) => {
                 onChangeProductValue("isSales", !e.target.checked);

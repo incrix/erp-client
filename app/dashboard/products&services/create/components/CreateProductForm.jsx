@@ -1,13 +1,7 @@
 "use client";
-import {
-  Stack,
-  Typography,
-  MenuItem,
-  ListSubheader,
-  IconButton,
-} from "@mui/material";
+import { Stack, Typography, MenuItem, ListSubheader } from "@mui/material";
 import CustomTextField from "@/app/components/CustomTextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelect from "@/app/components/CustomSelect";
 import CustomDuoButtonGroup from "@/app/components/CustomDuoButtonGroup";
 import CustomSearchBox from "@/app/components/CustomSearchBox";
@@ -18,10 +12,8 @@ import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import ScaleRoundedIcon from "@mui/icons-material/ScaleRounded";
 import Icons from "@/util/icons";
-import CustomDialogBox from "@/app/components/CustomDialogBox";
-import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateRounded";
-import CustomStack from "@/app/components/CustomStack";
-import CloseIcon from "@mui/icons-material/Close";
+import AddNewCategory from "./AddNewCategory";
+import getCategory from "@/util/categoryListUtil";
 
 export default function CreateProductForm({
   newProduct,
@@ -29,15 +21,25 @@ export default function CreateProductForm({
 }) {
   const [unitListFiltered, setUnitListFiltered] = useState(unitList);
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [categoryList, setCategoryList] = useState([]);
+  const [catListFiltered, setCatListFiltered] = useState(categoryList);
+
+  function updateCategory(update) {
+    getCategory(update).then(() => setCategoryList(getCategory()));
+  }
+
+  useEffect(() => {
+    updateCategory(true);
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   const renderUnitMenuItem = (option) => {
+    console.log(option);
     return (
       <MenuItem
         onKeyDown={(e) => e.stopPropagation()}
@@ -47,6 +49,7 @@ export default function CreateProductForm({
         <Typography fontWeight={600} color={"#97A1B1"}>
           {option.code}
         </Typography>
+        &nbsp;
         <Typography color={"#97A1B1"}>({option.name})</Typography>
       </MenuItem>
     );
@@ -66,83 +69,11 @@ export default function CreateProductForm({
 
   return (
     <Stack gap={2}>
-      <CustomDialogBox
+      <AddNewCategory
         open={open}
-        onClose={handleClose}
-        title={
-          <Stack direction={"row"} justifyContent={"space-between"}>
-            <h3>Create new category</h3>
-            <IconButton
-              onClick={handleClose}
-              sx={{ "&:hover": { color: "#FF2E2E" } }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </Stack>
-        }
-        actions={
-          <CustomButton smoothCorners={15} backgroundColor={"#0080FF"}>
-            Add
-          </CustomButton>
-        }
-      >
-        <Stack gap={2}>
-          {/* <Stack>
-            <label
-              for="upload-photo"
-              style={{
-                cursor: "pointer",
-              }}
-            >
-              <CustomStack
-                alignItems={"center"}
-                justifyContent={"center"}
-                smoothCorners={"12"}
-                borderRadius={"10px"}
-                width="120px"
-                height="100px"
-                border={"2px solid #82878C"}
-              >
-                <AddPhotoAlternateRoundedIcon
-                  sx={{
-                    color: "#82878C",
-                    fontSize: "40px",
-                  }}
-                />
-              </CustomStack>
-            </label>
-            <input
-              type="file"
-              id="upload-photo"
-              style={{
-                display: "none",
-              }}
-            />
-          </Stack> */}
-          <CustomTextField
-            fullWidth
-            height={"40px"}
-            smoothCorners={25}
-            placeholder={"Eg: Dairy Products"}
-            borderWidth="1px"
-            // onChange={(e) => {
-            //   onChangeProductValue("sku", e.target.value);
-            // }}
-          />
-          <CustomTextField
-            fullWidth
-            multiline
-            smoothCorners={25}
-            // sx={{minHeight:"80px"}}
-            placeholder={"Description"}
-            borderWidth="1px"
-            // onChange={(e) => {
-            //   onChangeProductValue("sku", e.target.value);
-            // }}
-          />
-        </Stack>
-      </CustomDialogBox>
-      {/* <AddCatDialogForm open={open} handleClose={handleClose} /> */}
+        handleClose={handleClose}
+        updateCategory={updateCategory}
+      />
       <Typography variant="h6" fontSize={14} color={"#222429"} fontWeight={600}>
         Basic Details
       </Typography>
@@ -290,6 +221,7 @@ export default function CreateProductForm({
               <CustomSearchBox
                 options={unitList}
                 setUnitListFiltered={setUnitListFiltered}
+                textPram={"name"}
               />
             </ListSubheader>
           }
@@ -324,22 +256,27 @@ export default function CreateProductForm({
         />
         <CustomSelect
           onChange={(event) => {
-            onChangeProductValue("categoryId", event.target.value);
+            onChangeProductValue("category", {
+              catId: categoryList.filter(
+                (category) => category.name === event.target.value
+              )[0].catId,
+              name: event.target.value,
+            });
           }}
-          value={newProduct.categoryId}
+          value={newProduct.category.name}
           placeholder={"Category"}
-          options={["Apple", "Android"]}
+          options={getCategory() && catListFiltered}
           width={"300px"}
           height={"40px"}
           renderMenuItem={(option) => {
             return (
               <MenuItem
                 onKeyDown={(e) => e.stopPropagation()}
-                key={option}
-                value={option}
+                key={option.catId}
+                value={option.name}
               >
                 <Typography width={"100%"} color={"#97A1B1"}>
-                  {option}
+                  {option.name}
                 </Typography>
               </MenuItem>
             );
@@ -361,8 +298,9 @@ export default function CreateProductForm({
             >
               <Stack gap={1}>
                 <CustomSearchBox
-                  options={unitList}
-                  setUnitListFiltered={setUnitListFiltered}
+                  options={categoryList}
+                  setUnitListFiltered={setCatListFiltered}
+                  textPram={"name"}
                 />
                 <CustomButton
                   width="100%"

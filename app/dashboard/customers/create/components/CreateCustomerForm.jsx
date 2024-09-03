@@ -205,7 +205,7 @@ export default function CreateCustomerForm({
           options={["Credit", "Debit"]}
           onClick={(value) => {
             onChangeCustomerValue("balance", {
-              type: value,
+              type: value === "Credit" ? "in" : "out",
               value: newCustomer.balance.value,
             });
           }}
@@ -216,6 +216,7 @@ export default function CreateCustomerForm({
           height={"40px"}
           smoothCorners={15}
           placeholder={"To pay"}
+          type="number"
           borderWidth="1px"
           InputProps={{
             startAdornment: (
@@ -231,7 +232,7 @@ export default function CreateCustomerForm({
           onChange={(e) => {
             onChangeCustomerValue("balance", {
               type: newCustomer.balance.type,
-              value: eval(e.target.value),
+              value: parseFloat(e.target.value),
             });
           }}
         />

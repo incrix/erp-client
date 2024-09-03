@@ -5,7 +5,7 @@ export default function PriceAction({ id, row }) {
     <Stack direction={"row"}>
       ₹&nbsp;
       <Typography variant="body2" fontWeight={600} fontSize={16}>
-        {row.amount}
+        {row.totalPrice}
       </Typography>
     </Stack>
   );
